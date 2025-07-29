@@ -1,0 +1,152 @@
+{
+    "paintings": {
+        "1": {
+            "title": "Blue Shapes on Blue Background",
+            "subtitle": "Oil on Canvas, 150cm x 150cm",
+            "description": "A powerful exploration of monochromatic harmony, where varying shades and textures of blue create depth and movement across the canvas.",
+            "image": "images/23.Blue Shapes on blue background, Oil on Canvas, 150cm x 150cm.jpg"
+        },
+        "2": {
+            "title": "Painting 2",
+            "subtitle": "Mixed Media",
+            "description": "Description for painting 2.",
+            "image": "images/painting-2.jpg"
+        },
+        "3": {
+            "title": "Painting 3",
+            "subtitle": "Acrylic on Canvas",
+            "description": "Description for painting 3.",
+            "image": "images/painting-3.jpg"
+        },
+        "4": {
+            "title": "Painting 4",
+            "subtitle": "Oil on Canvas",
+            "description": "Description for painting 4.",
+            "image": "images/painting-4.jpg"
+        },
+        "5": {
+            "title": "Painting 5",
+            "subtitle": "Mixed Media",
+            "description": "Description for painting 5.",
+            "image": "images/painting-5.jpg"
+        },
+        "6": {
+            "title": "Painting 6",
+            "subtitle": "Acrylic on Canvas",
+            "description": "Description for painting 6.",
+            "image": "images/painting-6.jpg"
+        },
+        "7": {
+            "title": "New Painting 7",
+            "subtitle": "Medium to be specified",
+            "description": "Description to be added.",
+            "image": "images/painting-1.jpg"
+        },
+        "8": {
+            "title": "New Painting 8",
+            "subtitle": "Medium to be specified",
+            "description": "Description to be added.",
+            "image": "images/painting-2.jpg"
+        },
+        "9": {
+            "title": "New Painting 9",
+            "subtitle": "Medium to be specified",
+            "description": "Description to be added.",
+            "image": "images/painting-3.jpg"
+        }
+    },
+    "commissions": {
+        "1": {
+            "title": "Custom Family Portrait",
+            "description": "A personalized oil painting capturing the essence of a beloved family, incorporating their unique dynamics and cherished memories.",
+            "image": "images/commission-1.jpg"
+        },
+        "2": {
+            "title": "Corporate Art Installation",
+            "description": "Large-scale abstract piece designed specifically for a modern office environment, reflecting the company's innovative spirit.",
+            "image": "images/commission-2.jpg"
+        },
+        "3": {
+            "title": "Memorial Tribute",
+            "description": "A sensitive and meaningful artwork created to honor the memory of a loved one, incorporating symbolic elements personal to the family.",
+            "image": "images/commission-3.jpg"
+        },
+        "4": {
+            "title": "New Commission 4",
+            "description": "Description to be added.",
+            "image": "images/commission-4.jpg"
+        },
+        "5": {
+            "title": "New Commission 5",
+            "description": "Description to be added.",
+            "image": "images/commission-1.jpg"
+        },
+        "6": {
+            "title": "New Commission 6",
+            "description": "Description to be added.",
+            "image": "images/commission-2.jpg"
+        },
+        "7": {
+            "title": "New Commission 7",
+            "description": "Description to be added.",
+            "image": "images/commission-3.jpg"
+        },
+        "8": {
+            "title": "New Commission 8",
+            "description": "Description to be added.",
+            "image": "images/commission-4.jpg"
+        },
+        "9": {
+            "title": "New Commission 9",
+            "description": "Description to be added.",
+            "image": "images/commission-1.jpg"
+        }
+    },
+    "small_works": {
+        "1": {
+            "title": "Contemplation",
+            "description": "A delicate study in light and shadow, exploring the quiet moments of reflection.",
+            "image": "images/small-work-1.jpg"
+        },
+        "2": {
+            "title": "Urban Rhythms",
+            "description": "Capturing the energy and movement of city life in bold, expressive strokes.",
+            "image": "images/small-work-2.jpg"
+        },
+        "3": {
+            "title": "Nature's Whisper",
+            "description": "A gentle exploration of natural forms and organic textures in miniature.",
+            "image": "images/small-work-3.jpg"
+        },
+        "4": {
+            "title": "Abstract Harmony",
+            "description": "An exploration of color relationships and compositional balance in a compact format.",
+            "image": "images/small-work-4.jpg"
+        },
+        "5": {
+            "title": "Emotional Landscape",
+            "description": "A personal journey expressed through expressive mark-making and intuitive color choices.",
+            "image": "images/small-work-5.jpg"
+        },
+        "6": {
+            "title": "Textural Studies",
+            "description": "An investigation into surface and material, creating depth through layered techniques.",
+            "image": "images/small-work-6.jpg"
+        },
+        "7": {
+            "title": "New Small Work 7",
+            "description": "Description to be added.",
+            "image": "images/small-work-1.jpg"
+        },
+        "8": {
+            "title": "New Small Work 8",
+            "description": "Description to be added.",
+            "image": "images/small-work-2.jpg"
+        },
+        "9": {
+            "title": "New Small Work 9",
+            "description": "Description to be added.",
+            "image": "images/small-work-3.jpg"
+        }
+    }
+}
