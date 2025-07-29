@@ -37,12 +37,10 @@ add_action( 'after_setup_theme', 'artist_theme_setup' );
 // Enqueue scripts and styles
 function artist_theme_scripts() {
     // Enqueue main stylesheet
-    wp_enqueue_style( 'artist-theme-style', get_stylesheet_uri() );
-
-    // Enqueue JavaScript file
-    wp_enqueue_script( 'artist-theme-scripts', get_template_directory_uri() . '/assets/js/scripts.js', array(), null, true );
+wp_enqueue_style( 'artist-theme-style', get_template_directory_uri() . '/assets/css/style.css', array(), '1.0.3' );    
+// Enqueue JavaScript file
+wp_enqueue_script( 'artist-theme-scripts', get_template_directory_uri() . '/assets/js/scripts.js', array(), null, true );
 }
 
 // Hook the scripts function to the wp_enqueue_scripts action
 add_action( 'wp_enqueue_scripts', 'artist_theme_scripts' );
-?>

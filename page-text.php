@@ -33,14 +33,7 @@ get_header(); ?>
             <!-- Text Page Content Structure -->
             <div class="text-page-content">
                 
-                <!-- Introduction Section -->
-                <!-- COMMENTED OUT: Introduction box - uncomment if needed
-                <div class="text-page-intro">
-                    <h2>Artist's Voice</h2>
-                    <p>Discover the stories, inspiration, and creative process behind the artwork through words and visuals.</p>
-                    <p>Explore the journey, philosophy, and insights that shape each creation through intimate reflections and behind-the-scenes glimpses.</p>
-                </div>
-                -->
+                
                 
                 <!-- WordPress Content (if you add content in admin) -->
                 <div class="entry-content">

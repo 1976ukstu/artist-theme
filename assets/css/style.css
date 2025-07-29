@@ -114,7 +114,7 @@ footer {
 /* ...existing code... */
 
 body.home {
-    background: url('images/bg.jpg') no-repeat center center fixed;
+    background: url('../../images/bg.jpg') no-repeat center center fixed;
     background-size: cover;
     min-height: 100vh;
     margin: 0;
@@ -122,7 +122,7 @@ body.home {
 }
 
 body.commissions-and-murals {
-    background: url('images/DC Large ss 01.jpg') no-repeat center center fixed;
+    background: url('../../images/DC Large ss 01.jpg') no-repeat center center fixed;
     background-size: cover;
     min-height: 100vh;
     margin: 0;
@@ -3275,5 +3275,40 @@ body {
     :root {
         --content-top-spacing: 170px;
         --content-side-padding: 15px;
+    }
+}
+
+/* ==============================================
+   NUCLEAR POSITIONING OVERRIDE - FINAL FIX
+   ============================================== */
+
+/* Force ALL pages to 210px with maximum specificity */
+body .site-main,
+body #main,
+body .content-area .site-main,
+body .paintings-content,
+body .commissions-content,
+body .small-works-content,
+body .contact-content,
+body .text-page-content,
+body .this-week-content,
+body .video-bg-content {
+    padding-top: 210px !important;
+    margin-top: 0 !important;
+}
+
+/* Mobile override */
+@media (max-width: 768px) {
+    body .site-main,
+    body #main,
+    body .content-area .site-main,
+    body .paintings-content,
+    body .commissions-content,
+    body .small-works-content,
+    body .contact-content,
+    body .text-page-content,
+    body .this-week-content,
+    body .video-bg-content {
+        padding-top: 180px !important;
     }
 }
