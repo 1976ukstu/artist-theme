@@ -133,13 +133,8 @@ add_action( 'admin_init', 'add_weekly_updates_capabilities' );
 function artist_theme_scripts() {
     // Enqueue Google Fonts (proper way, not @import)
     wp_enqueue_style( 'artist-theme-fonts', 'https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap', array(), null );
-    
-    // Enqueue main stylesheet with version for cache busting
-    wp_enqueue_style( 'artist-theme-style', get_stylesheet_uri(), array('artist-theme-fonts'), '1.0.2' );
-
-    // Enqueue additional styles
-    wp_enqueue_style( 'artist-theme-custom-style', get_template_directory_uri() . '/assets/css/style.css', array('artist-theme-style'), '1.0.2' );
-
+// Fix the dependency to point to fonts instead
+wp_enqueue_style( 'artist-theme-custom-style', get_template_directory_uri() . '/assets/css/style.css', array('artist-theme-fonts'), '1.0.3' );
     // Enqueue JavaScript file
     wp_enqueue_script( 'artist-theme-scripts', get_template_directory_uri() . '/assets/js/scripts.js', array(), '1.0.3', true );
 }
@@ -155,4 +150,3 @@ function artist_theme_clean_styles() {
 add_action( 'wp_enqueue_scripts', 'artist_theme_clean_styles', 1 );
 
 // Additional custom functions can be added below
-?>

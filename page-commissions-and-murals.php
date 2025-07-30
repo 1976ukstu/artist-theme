@@ -37,14 +37,7 @@ get_header(); ?>
             <!-- Commission Content Structure -->
             <div class="commissions-content">
                 
-                <!-- Introduction Section -->
-                <!-- COMMENTED OUT: Introduction box - uncomment if needed
-                <div class="commission-intro">
-                    <h2>Custom Commissions & Murals</h2>
-                    <p>Transform your space with original artwork created specifically for you. I work closely with clients to bring their vision to life through custom paintings, portraits, and large-scale murals.</p>
-                    <p>Each piece is carefully crafted using professional materials and techniques, ensuring your artwork will be treasured for years to come.</p>
-                </div>
-                -->
+                
                 
                 <!-- WordPress Content (if you add content in admin) -->
                 <div class="entry-content">

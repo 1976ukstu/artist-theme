@@ -32,14 +32,7 @@ get_header(); ?>
         <!-- This Week Page Content -->
         <div class="this-week-content">
             
-            <!-- Introduction Section -->
-            <!-- COMMENTED OUT: Introduction box - uncomment if needed
-            <div class="this-week-intro">
-                <h2>This Week...</h2>
-                <p>A glimpse into the creative journey - fresh insights, works in progress, and studio moments.</p>
-                <p>Follow along with weekly updates from the studio, capturing the evolving artistic process and inspiration behind each piece.</p>
-            </div>
-            -->
+            
             
             <?php
             // Get the latest weekly updates

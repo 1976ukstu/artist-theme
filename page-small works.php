@@ -37,15 +37,7 @@ get_header(); ?>
             <!-- Small Works Content Structure -->
             <div class="small-works-content">
                 
-                <!-- Introduction Section -->
-                <!-- COMMENTED OUT: Introduction box - uncomment if needed
-                <div class="small-works-intro">
-                    <h2>Small Works Collection</h2>
-                    <p>Intimate pieces that capture moments of inspiration and experimentation. These smaller works offer an accessible way to own original artwork while exploring different themes and techniques.</p>
-                    <p>Each piece tells its own story, perfect for personal spaces or as thoughtful gifts for art lovers.</p>
-                </div>
-                -->
-                
+               
                 <!-- WordPress Content (if you add content in admin) -->
                 <div class="entry-content">
                     <?php the_content(); ?>

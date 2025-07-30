@@ -37,14 +37,7 @@ get_header(); ?>
             <!-- Paintings Content Structure -->
             <div class="paintings-content">
                 
-                <!-- Introduction Section -->
-                <!-- COMMENTED OUT: Introduction box - uncomment if needed
-                <div class="paintings-intro">
-                    <h2>Paintings Gallery</h2>
-                    <p>A collection of original paintings exploring color, form, and emotion. Each piece represents a unique moment of artistic discovery and creative expression.</p>
-                    <p>These works span various themes and techniques, showcasing the evolution of artistic vision and technical mastery.</p>
-                </div>
-                -->
+                
                 
                 <!-- WordPress Content (if you add content in admin) -->
                 <div class="entry-content">

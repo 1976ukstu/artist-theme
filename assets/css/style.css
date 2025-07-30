@@ -677,31 +677,6 @@ footer {
     margin-bottom: 60px;
 }
 
-/* Commission intro section */
-.commission-intro {
-    background: rgba(255, 255, 255, 0.9);
-    padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-    text-align: center;
-    margin-top: 10px;
-}
-
-.commission-intro h2 {
-    font-size: 2.5em;
-    color: #333;
-    margin-bottom: 20px;
-    font-weight: 300;
-    letter-spacing: 2px;
-}
-
-.commission-intro p {
-    font-size: 1.2em;
-    line-height: 1.8;
-    color: #555;
-    max-width: 800px;
-    margin: 0 auto 20px;
-}
 
 /* Commission gallery grid */
 .commission-gallery {
@@ -801,9 +776,7 @@ footer {
 
 /* Responsive adjustments for commissions */
 @media (max-width: 768px) {
-    .commission-intro h2 {
-        font-size: 2em;
-    }
+
     
     .commission-gallery {
         grid-template-columns: 1fr;
@@ -833,31 +806,6 @@ footer {
     grid-template-columns: 1fr;
     gap: 40px;
     margin-bottom: 60px;
-}
-
-/* Small works intro section */
-.small-works-intro {
-    background: rgba(255, 255, 255, 0.9);
-    padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-    text-align: center;
-}
-
-.small-works-intro h2 {
-    font-size: 2.5em;
-    color: #333;
-    margin-bottom: 20px;
-    font-weight: 300;
-    letter-spacing: 2px;
-}
-
-.small-works-intro p {
-    font-size: 1.2em;
-    line-height: 1.8;
-    color: #555;
-    max-width: 800px;
-    margin: 0 auto 20px;
 }
 
 /* Small works gallery grid */
@@ -948,9 +896,7 @@ footer {
 
 /* Responsive adjustments for small works */
 @media (max-width: 768px) {
-    .small-works-intro h2 {
-        font-size: 2em;
-    }
+   
     
     .small-works-gallery {
         grid-template-columns: 1fr;
@@ -971,32 +917,6 @@ footer {
     grid-template-columns: 1fr;
     gap: 40px;
     margin-bottom: 60px;
-}
-
-/* Paintings intro section */
-.paintings-intro {
-    background: rgba(255, 255, 255, 0.9);
-    padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-    text-align: center;
-    margin-top: 10px;
-}
-
-.paintings-intro h2 {
-    font-size: 2.5em;
-    color: #333;
-    margin-bottom: 20px;
-    font-weight: 300;
-    letter-spacing: 2px;
-}
-
-.paintings-intro p {
-    font-size: 1.2em;
-    line-height: 1.8;
-    color: #555;
-    max-width: 800px;
-    margin: 0 auto 20px;
 }
 
 /* Paintings gallery grid */
@@ -1095,9 +1015,7 @@ footer {
 
 /* Responsive adjustments for paintings */
 @media (max-width: 768px) {
-    .paintings-intro h2 {
-        font-size: 2em;
-    }
+    
     
     .paintings-gallery {
         grid-template-columns: 1fr;
@@ -1120,31 +1038,6 @@ footer {
     margin-bottom: 60px;
 }
 
-/* Contact intro section */
-.contact-intro {
-    background: rgba(255, 255, 255, 0.9);
-    padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-    text-align: center;
-    margin-top: 10px;
-}
-
-.contact-intro h2 {
-    font-size: 2.5em;
-    color: #333;
-    margin-bottom: 20px;
-    font-weight: 300;
-    letter-spacing: 2px;
-}
-
-.contact-intro p {
-    font-size: 1.2em;
-    line-height: 1.8;
-    color: #555;
-    max-width: 600px;
-    margin: 0 auto;
-}
 
 /* Contact layout - side by side */
 .contact-layout {
@@ -1293,9 +1186,6 @@ footer {
         grid-template-columns: 1fr;
     }
     
-    .contact-intro h2 {
-        font-size: 2em;
-    }
     
     .contact-form-section,
     .contact-video-section {
@@ -1594,31 +1484,6 @@ footer {
     padding: 200px 20px 40px 20px;
 }
 
-.text-page-intro {
-    background: rgba(255, 255, 255, 0.9);
-    padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-    text-align: center;
-    margin-bottom: 60px;
-    margin-top: -10px;
-}
-
-.text-page-intro h2 {
-    font-size: 3.5rem;
-    color: #333;
-    margin-bottom: 20px;
-    letter-spacing: -1px;
-    font-weight: 300;
-}
-
-.text-page-intro p {
-    font-size: 1.2rem;
-    color: #666;
-    max-width: 600px;
-    margin: 0 auto;
-    line-height: 1.6;
-}
 
 /* 2x2 Grid Container */
 .text-grid-container {
@@ -1772,10 +1637,6 @@ footer {
         padding: 35px;
     }
     
-    .text-page-intro h2 {
-        font-size: 3rem;
-    }
-    
     .video-wrapper video {
         min-height: 200px;
     }
@@ -1791,13 +1652,6 @@ footer {
         padding: 30px;
     }
     
-    .text-page-intro h2 {
-        font-size: 2.5rem;
-    }
-    
-    .text-page-intro p {
-        font-size: 1.1rem;
-    }
     
     .text-card h3 {
         font-size: 1.8rem;
@@ -1833,11 +1687,7 @@ footer {
     .text-card-inner {
         padding: 25px;
     }
-    
-    .text-page-intro h2 {
-        font-size: 2rem;
-    }
-    
+
     .text-card h3 {
         font-size: 1.6rem;
         margin-bottom: 20px;
@@ -1861,32 +1711,6 @@ footer {
     padding: 200px 20px 60px 20px;
 }
 
-/* This Week intro section */
-.this-week-intro {
-    background: rgba(255, 255, 255, 0.9);
-    padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-    text-align: center;
-    margin-bottom: 60px;
-    margin-top: -10px;
-}
-
-.this-week-intro h2 {
-    font-size: 2.5em;
-    color: #333;
-    margin-bottom: 20px;
-    font-weight: 300;
-    letter-spacing: 2px;
-}
-
-.this-week-intro p {
-    font-size: 1.2em;
-    color: #666;
-    max-width: 600px;
-    margin: 0 auto 15px auto;
-    line-height: 1.6;
-}
 
 /* Featured Update Section */
 .featured-update {
@@ -2243,13 +2067,9 @@ footer {
 }
 
 @media (max-width: 768px) {
-    .this-week-intro h2 {
-        font-size: 2rem;
-    }
     
-    .this-week-intro p {
-        font-size: 1.1rem;
-    }
+    
+    
     
     .featured-text {
         padding: 30px;
@@ -2291,9 +2111,6 @@ footer {
         padding: 200px 15px 40px 15px;
     }
     
-    .this-week-intro h1 {
-        font-size: 2.5rem;
-    }
     
     .featured-text {
         padding: 25px;
@@ -2838,108 +2655,7 @@ body {
     -moz-osx-font-smoothing: grayscale;
 }
 
-/* ==============================================
-   ENHANCED PAGE TITLES - BOLD & BEAUTIFUL
-   ============================================== */
 
-/* Main page titles - dramatically enhanced */
-.site-main h1,
-.site-main h2:first-child,
-.paintings-intro h2,
-.commissions-intro h2,
-.small-works-intro h2,
-.contact-intro h2,
-.text-page-intro h2,
-.this-week-intro h2 {
-    font-family: 'Helvetica', 'Helvetica Neue', Arial, sans-serif !important;
-    font-size: clamp(2.8rem, 6vw, 4.5rem) !important; /* Much larger scaling */
-    font-weight: 400 !important; /* Increased from 300 to 400 for more presence */
-    color: #2c3e50 !important;
-    letter-spacing: -1px !important;
-    line-height: 1.1 !important;
-    margin-bottom: 25px !important;
-    text-align: center !important;
-    position: relative !important;
-}
-
-/* Add subtle text shadow for even more presence */
-.site-main h1::after,
-.site-main h2:first-child::after,
-.paintings-intro h2::after,
-.commissions-intro h2::after,
-.small-works-intro h2::after,
-.contact-intro h2::after,
-.text-page-intro h2::after,
-.this-week-intro h2::after {
-    content: '';
-    position: absolute;
-    bottom: -8px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 60px;
-    height: 3px;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    border-radius: 2px;
-}
-
-/* Responsive title adjustments */
-@media screen and (max-width: 480px) {
-    .site-main h1,
-    .site-main h2:first-child,
-    .paintings-intro h2,
-    .commissions-intro h2,
-    .small-works-intro h2,
-    .contact-intro h2,
-    .text-page-intro h2,
-    .this-week-intro h2 {
-        font-size: 2.8rem !important; /* 44.8px on mobile */
-        font-weight: 500 !important; /* Even bolder on mobile */
-    }
-}
-
-@media screen and (min-width: 481px) and (max-width: 768px) {
-    .site-main h1,
-    .site-main h2:first-child,
-    .paintings-intro h2,
-    .commissions-intro h2,
-    .small-works-intro h2,
-    .contact-intro h2,
-    .text-page-intro h2,
-    .this-week-intro h2 {
-        font-size: 3.5rem !important; /* 56px on tablet */
-        font-weight: 450 !important;
-    }
-}
-
-@media screen and (min-width: 769px) {
-    .site-main h1,
-    .site-main h2:first-child,
-    .paintings-intro h2,
-    .commissions-intro h2,
-    .small-works-intro h2,
-    .contact-intro h2,
-    .text-page-intro h2,
-    .this-week-intro h2 {
-        font-size: 4.5rem !important; /* 72px on desktop */
-        font-weight: 400 !important;
-    }
-}
-
-/* Enhanced intro paragraph styling to complement bold titles */
-.paintings-intro p,
-.commissions-intro p,
-.small-works-intro p,
-.contact-intro p,
-.text-page-intro p,
-.this-week-intro p {
-    font-family: 'Helvetica', 'Helvetica Neue', Arial, sans-serif !important;
-    font-size: clamp(1.1rem, 2.5vw, 1.3rem) !important;
-    font-weight: 300 !important;
-    color: #555 !important;
-    line-height: 1.7 !important;
-    max-width: 700px !important;
-    margin: 0 auto 20px auto !important;
-}
 
 /* Balance the side navigation to complement bold titles */
 .home-menu a,
@@ -2999,15 +2715,6 @@ body {
     }
 }
 
-/* Remove conflicting top spacing from intro sections */
-.contact-intro,
-.text-page-intro,
-.this-week-intro,
-.paintings-intro,
-.commissions-intro,
-.small-works-intro {
-    margin-top: 0 !important;
-}
 
 /* ==============================================
    SUPER-SPECIFIC CONTENT POSITIONING FIX
@@ -3095,47 +2802,6 @@ body {
     cursor: pointer !important;
 }
 
-/* Page Titles - Exactly Half the Size of Front Page Name */
-/*.site-main h1,
-.site-main h2:first-child,
-.paintings-intro h2,
-.commissions-intro h2,
-.small-works-intro h2,
-.contact-intro h2,
-.text-page-intro h2,
-.this-week-intro h2 {
-    font-family: 'Helvetica', 'Helvetica Neue', Arial, sans-serif !important;
-    font-size: clamp(1.25rem, 4vw, 2.5rem) !important; /* Half size: 20px to 40px */
-    /*font-weight: 300 !important; /* Match the elegant lightness of the name */
-    /*color: #2c3e50 !important;
-    letter-spacing: -0.5px !important;
-    line-height: 1.2 !important;
-    margin-bottom: 20px !important;
-    text-align: center !important;
-    position: relative !important;
-}
-*/
-
-/* Page Titles - 75% the Size of Front Page Name */
-.site-main h1,
-.site-main h2:first-child,
-.paintings-intro h2,
-.commissions-intro h2,
-.small-works-intro h2,
-.contact-intro h2,
-.text-page-intro h2,
-.this-week-intro h2 {
-    font-family: 'Helvetica', 'Helvetica Neue', Arial, sans-serif !important;
-    font-size: clamp(1.875rem, 6vw, 3.75rem) !important; /* 75% size: 30px to 60px */
-    font-weight: 300 !important;
-    color: #2c3e50 !important;
-    letter-spacing: -0.5px !important;
-    line-height: 1.2 !important;
-    margin-bottom: 20px !important;
-    text-align: center !important;
-    position: relative !important;
-}
-
 /* Side Menu Links - Elegant Balance */
 .home-menu a,
 .side-menu a {
@@ -3147,53 +2813,6 @@ body {
     padding: clamp(8px, 1.5vw, 12px) clamp(12px, 2vw, 16px) !important;
 }
 
-/* Remove gradient underlines for cleaner look */
-.site-main h1::after,
-.site-main h2:first-child::after,
-.paintings-intro h2::after,
-.commissions-intro h2::after,
-.small-works-intro h2::after,
-.contact-intro h2::after,
-.text-page-intro h2::after,
-.this-week-intro h2::after {
-    display: none !important; /* Remove gradient lines for cleaner hierarchy */
-}
-
-/* Page Titles - 75% the Size of Front Page Name */
-.site-main h1,
-.site-main h2:first-child,
-.paintings-intro h2,
-.commissions-intro h2,
-.small-works-intro h2,
-.contact-intro h2,
-.text-page-intro h2,
-.this-week-intro h2 {
-    font-family: 'Helvetica', 'Helvetica Neue', Arial, sans-serif !important;
-    font-size: clamp(1.875rem, 6vw, 3.75rem) !important; /* 75% size: 30px to 60px */
-    font-weight: 300 !important;
-    color: #2c3e50 !important;
-    letter-spacing: -0.5px !important;
-    line-height: 1.2 !important;
-    margin-bottom: 20px !important;
-    text-align: center !important;
-    position: relative !important;
-}
-
-/* Enhanced intro paragraphs to complement the new hierarchy */
-.paintings-intro p,
-.commissions-intro p,
-.small-works-intro p,
-.contact-intro p,
-.text-page-intro p,
-.this-week-intro p {
-    font-family: 'Helvetica', 'Helvetica Neue', Arial, sans-serif !important;
-    font-size: clamp(0.95rem, 2vw, 1.1rem) !important; /* Proportional to new title sizes */
-    font-weight: 300 !important;
-    color: #666 !important;
-    line-height: 1.6 !important;
-    max-width: 600px !important;
-    margin: 0 auto 20px auto !important;
-}
 
 /* ==============================================
    PROFESSIONAL CONSISTENT CONTENT POSITIONING
@@ -3252,16 +2871,6 @@ body {
     max-width: var(--content-max-width) !important;
 }
 
-/* Remove any conflicting margins from intro sections */
-.paintings-intro,
-.commissions-intro,
-.small-works-intro,
-.contact-intro,
-.text-page-intro,
-.this-week-intro {
-    margin-top: 0 !important;
-    padding-top: 0 !important;
-}
 
 /* Responsive adjustments using custom properties */
 @media (max-width: 768px) {
@@ -3310,5 +2919,45 @@ body .video-bg-content {
     body .this-week-content,
     body .video-bg-content {
         padding-top: 180px !important;
+    }
+}
+
+/* ==============================================
+   ENHANCED FRONT PAGE MENU - DOUBLE SIZE
+   ============================================== */
+
+/* Make front page menu links double size with beautiful color */
+body.home .home-menu a,
+body.home .home-permanent-menu .home-menu a {
+    font-family: 'Helvetica', 'Helvetica Neue', Arial, sans-serif !important;
+    font-size: clamp(1.8rem, 4.4vw, 2.4rem) !important; /* DOUBLE SIZE: from 0.9-1.2rem to 1.8-2.4rem */
+    font-weight: 400 !important;
+    color: #2c3e50 !important; /* Beautiful dark blue-gray color to match site title */
+    letter-spacing: 0.05em !important;
+    transition: all 0.3s ease !important;
+    padding: clamp(16px, 3vw, 24px) clamp(24px, 4vw, 32px) !important; /* Double padding too */
+    line-height: 1.2 !important;
+    text-shadow: 0 1px 3px rgba(44, 62, 80, 0.1) !important; /* Subtle shadow for elegance */
+}
+
+/* Beautiful hover effect */
+body.home .home-menu a:hover {
+    color: #34495e !important; /* Slightly lighter shade on hover */
+    transform: scale(1.05) !important; /* Tiny grow effect */
+    text-shadow: 0 2px 6px rgba(44, 62, 80, 0.2) !important;
+}
+
+/* Responsive scaling for mobile */
+@media (max-width: 768px) {
+    body.home .home-menu a {
+        font-size: clamp(1.4rem, 3.5vw, 1.8rem) !important; /* Smaller but still prominent on mobile */
+        padding: clamp(12px, 2.5vw, 18px) clamp(18px, 3vw, 24px) !important;
+    }
+}
+
+@media (max-width: 480px) {
+    body.home .home-menu a {
+        font-size: clamp(1.2rem, 3vw, 1.5rem) !important; /* Mobile-friendly sizing */
+        padding: clamp(10px, 2vw, 14px) clamp(16px, 2.5vw, 20px) !important;
     }
 }

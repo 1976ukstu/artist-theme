@@ -26,17 +26,7 @@ get_header(); ?>
     ?>
 </div>
 
-<!-- Video Background Container - COMMENTED OUT: Background video - uncomment when video is decided
-<div class="video-background-container">
-    <video class="video-background" autoplay muted loop poster="<?php echo get_template_directory_uri(); ?>/images/video-poster.jpg">
-        <source src="<?php echo get_template_directory_uri(); ?>/videos/artist-intro.mp4" type="video/mp4">
-        <source src="<?php echo get_template_directory_uri(); ?>/videos/artist-intro.webm" type="video/webm">
-    </video>
-    
-    Video Overlay
-    <div class="video-overlay"></div>
-</div>
--->
+
 
 <div id="primary" class="content-area">
     <main id="main" class="site-main video-bg-content">
@@ -101,40 +91,6 @@ get_header(); ?>
                     </div>
                 </div>
                 
-                <!-- Contact Info Cards -->
-                <!-- COMMENTED OUT: 3 small info cards - uncomment if needed
-                <div class="contact-info-cards">
-                    <div class="info-card">
-                        <h3>Direct Contact</h3>
-                        <p><strong>Email:</strong> <a href="mailto:dragica@example.com">dragica@example.com</a></p>
-                        <p><strong>Phone:</strong> <a href="tel:+1234567890">+1 (234) 567-890</a></p>
-                    </div>
-                    
-                    <div class="info-card">
-                        <h3>Studio Visits</h3>
-                        <p>Private studio viewings available by appointment</p>
-                        <p>Located in [Your City]</p>
-                    </div>
-                    
-                    <div class="info-card">
-                        <h3>Response Time</h3>
-                        <p>I typically respond within 24 hours</p>
-                        <p>For urgent inquiries, please call directly</p>
-                    </div>
-                </div>
-                -->
-                
-                <!-- Social Links -->
-                <!-- COMMENTED OUT: Follow My Journey section - uncomment if needed
-                <div class="social-section-video-bg">
-                    <h3>Follow My Journey</h3>
-                    <div class="social-links-video-bg">
-                        <a href="#" class="social-link-video-bg">Instagram</a>
-                        <a href="#" class="social-link-video-bg">Facebook</a>
-                        <a href="#" class="social-link-video-bg">LinkedIn</a>
-                    </div>
-                </div>
-                -->
                 
             </div>
             
