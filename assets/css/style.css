@@ -2931,7 +2931,7 @@ body .video-bg-content {
 body.home .home-menu a,
 body.home .home-permanent-menu .home-menu a {
     font-family: 'Helvetica', 'Helvetica Neue', Arial, sans-serif !important;
-    font-size: clamp(1.8rem, 4.4vw, 2.4rem) !important; /* DOUBLE SIZE: from 0.9-1.2rem to 1.8-2.4rem */
+    font-size: clamp(1.2rem, 4.4vw, 2.0rem) !important; /* DOUBLE SIZE: from 0.9-1.2rem to 1.8-2.4rem */
     font-weight: 400 !important;
     color: #2c3e50 !important; /* Beautiful dark blue-gray color to match site title */
     letter-spacing: 0.05em !important;
@@ -2944,8 +2944,8 @@ body.home .home-permanent-menu .home-menu a {
 /* Beautiful hover effect */
 body.home .home-menu a:hover {
     color: #ffffff !important; /* Slightly lighter shade on hover */
-    transform: scale(1.05) !important; /* Tiny grow effect */
-    text-shadow: 0 2px 6px rgba(44, 62, 80, 0.2) !important;
+    transform: scale(1.2) !important; /* Tiny grow effect */
+    text-shadow: 0 2px 6px rgba(83, 102, 121, 0.331) !important;
 }
 
 /* Responsive scaling for mobile */
@@ -3225,4 +3225,207 @@ body.home .home-menu a:hover {
         top: 2% !important;
         right: 2% !important;
     }
+}
+
+/* ==============================================
+   DASHBOARD CARD MANAGEMENT STYLES
+   ============================================== */
+
+/* Enhanced Dashboard Actions */
+.dashboard-actions {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 30px;
+    margin: 40px 0;
+    padding: 30px;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 15px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+.card-management-section h3,
+.save-section h3 {
+    font-size: 1.4rem;
+    color: #2c3e50;
+    margin-bottom: 20px;
+    font-weight: 500;
+}
+
+.card-buttons-group {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+/* Beautiful Dashboard Buttons */
+.dashboard-btn {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 15px 25px;
+    border: none;
+    border-radius: 12px;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: 'Helvetica', 'Helvetica Neue', Arial, sans-serif;
+    min-width: 160px;
+    justify-content: center;
+}
+
+.dashboard-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none !important;
+}
+
+/* Add Card Button */
+.add-btn {
+    background: linear-gradient(135deg, #27ae60 0%, #2ecc71 100%);
+    color: white;
+    box-shadow: 0 4px 15px rgba(39, 174, 96, 0.3);
+}
+
+.add-btn:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(39, 174, 96, 0.4);
+}
+
+/* Remove Card Button */
+.remove-btn {
+    background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+    color: white;
+    box-shadow: 0 4px 15px rgba(231, 76, 60, 0.3);
+}
+
+.remove-btn:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(231, 76, 60, 0.4);
+}
+
+/* Enhanced Save and Publish Button */
+.save-btn {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+    color: white !important;
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3) !important;
+    width: 100% !important;
+    font-size: 1.1rem !important;
+    padding: 18px 30px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 10px !important;
+    border: none !important;
+    border-radius: 12px !important;
+    cursor: pointer !important;
+    transition: all 0.3s ease !important;
+    font-family: 'Helvetica', 'Helvetica Neue', Arial, sans-serif !important;
+}
+
+.save-btn:hover {
+    transform: translateY(-2px) !important;
+    box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4) !important;
+}
+
+/* Button Icons */
+.btn-icon {
+    font-size: 1.2rem;
+    line-height: 1;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .dashboard-actions {
+        grid-template-columns: 1fr;
+        gap: 20px;
+        padding: 20px;
+    }
+    
+    .card-buttons-group {
+        flex-direction: column;
+    }
+    
+    .dashboard-btn {
+        width: 100%;
+        min-width: auto;
+    }
+}
+
+/* ==============================================
+   DASHBOARD BUTTONS - NUCLEAR OVERRIDE
+   ============================================== */
+
+/* Force dashboard button styles with maximum specificity */
+body .dashboard-actions {
+    display: grid !important;
+    grid-template-columns: 2fr 1fr !important;
+    gap: 30px !important;
+    margin: 40px 0 !important;
+    padding: 30px !important;
+    background: rgba(255, 255, 255, 0.95) !important;
+    border-radius: 15px !important;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1) !important;
+}
+
+body .dashboard-btn,
+body button.dashboard-btn,
+body input.dashboard-btn {
+    display: flex !important;
+    align-items: center !important;
+    gap: 10px !important;
+    padding: 15px 25px !important;
+    border: none !important;
+    border-radius: 12px !important;
+    font-size: 1rem !important;
+    font-weight: 500 !important;
+    cursor: pointer !important;
+    transition: all 0.3s ease !important;
+    font-family: 'Helvetica', 'Helvetica Neue', Arial, sans-serif !important;
+    min-width: 160px !important;
+    justify-content: center !important;
+    text-decoration: none !important;
+}
+
+body .add-btn {
+    background: linear-gradient(135deg, #27ae60 0%, #2ecc71 100%) !important;
+    color: white !important;
+    box-shadow: 0 4px 15px rgba(39, 174, 96, 0.3) !important;
+}
+
+body .add-btn:hover:not(:disabled) {
+    transform: translateY(-2px) !important;
+    box-shadow: 0 8px 25px rgba(39, 174, 96, 0.4) !important;
+}
+
+body .remove-btn {
+    background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%) !important;
+    color: white !important;
+    box-shadow: 0 4px 15px rgba(231, 76, 60, 0.3) !important;
+}
+
+body .remove-btn:hover:not(:disabled) {
+    transform: translateY(-2px) !important;
+    box-shadow: 0 8px 25px rgba(231, 76, 60, 0.4) !important;
+}
+
+body .save-btn {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+    color: white !important;
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3) !important;
+    width: 100% !important;
+    font-size: 1.1rem !important;
+    padding: 18px 30px !important;
+}
+
+body .save-btn:hover {
+    transform: translateY(-2px) !important;
+    box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4) !important;
+}
+
+/* TEMPORARY TEST - REMOVE AFTER TESTING */
+.dashboard-btn {
+    background: red !important;
+    color: white !important;
+    padding: 20px !important;
 }

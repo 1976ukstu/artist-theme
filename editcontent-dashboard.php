@@ -685,17 +685,36 @@ $current_section = $_GET['section'] ?? 'dashboard';
                     <?php endfor; ?>
                 </div>
                 
-                <button type="submit" class="save-btn">💾 Save All Paintings</button>
-            </form>
+                <div class="dashboard-actions">
+                    <div class="card-management-section">
+                        <h3>Gallery Management</h3>
+                        <div class="card-buttons-group">
+                            <button type="button" id="add-card-btn" class="dashboard-btn add-btn">
+                                <span class="btn-icon">+</span>
+                                <span class="btn-text">Add New Painting</span>
+                            </button>
+                            <button type="button" id="remove-card-btn" class="dashboard-btn remove-btn" disabled>
+                                <span class="btn-icon">-</span>
+                                <span class="btn-text">Remove Selected</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="save-section">
+                    <button type="submit" class="dashboard-btn save-btn">
+                        <span class="btn-icon">💾</span>
+                        <span class="btn-text">Save and Publish</span>
+                </button>
         </div>
-    </div>
-    
+</div>
+
 <?php elseif ($current_section === 'commissions'): ?>
     <!-- COMMISSIONS EDITOR -->
     <div class="dashboard-container">
         <div class="content-editor">
             <div class="section-header">
-                <h2>🏛️ Commissions Editor</h2>
+                <h2>🏛️ Commissions and Murals Editor</h2>
                 <a href="?section=dashboard" class="back-btn">← Back to Dashboard</a>
             </div>
             
@@ -736,12 +755,31 @@ $current_section = $_GET['section'] ?? 'dashboard';
                         </div>
                     <?php endfor; ?>
                 </div>
-                
-                <button type="submit" class="save-btn">💾 Save All Commissions</button>
-            </form>
-        </div>
+
+                <div class="dashboard-actions">
+                    <div class="card-management-section">
+                        <h3>Gallery Management</h3>
+                        <div class="card-buttons-group">
+                            <button type="button" id="add-card-btn" class="dashboard-btn add-btn">
+                                <span class="btn-icon">+</span>
+                                <span class="btn-text">Add New Commission or Mural</span>
+                            </button>
+                            <button type="button" id="remove-card-btn" class="dashboard-btn remove-btn" disabled>
+                                <span class="btn-icon">-</span>
+                                <span class="btn-text">Remove Selected</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="save-section">
+        <button type="submit" class="dashboard-btn save-btn">
+            <span class="btn-icon">💾</span>
+            <span class="btn-text">Save and Publish</span>
+        </button>
     </div>
-    
+</div>
+ 
 <?php elseif ($current_section === 'small_works'): ?>
     <!-- SMALL WORKS EDITOR -->
     <div class="dashboard-container">
@@ -789,11 +827,29 @@ $current_section = $_GET['section'] ?? 'dashboard';
                     <?php endfor; ?>
                 </div>
                 
-                <button type="submit" class="save-btn">💾 Save All Small Works</button>
-            </form>
-        </div>
+                <div class="dashboard-actions">
+                    <div class="card-management-section">
+                        <h3>Gallery Management</h3>
+                        <div class="card-buttons-group">
+                            <button type="button" id="add-card-btn" class="dashboard-btn add-btn">
+                                <span class="btn-icon">+</span>
+                                <span class="btn-text">Add New Small Work</span>
+                            </button>
+                            <button type="button" id="remove-card-btn" class="dashboard-btn remove-btn" disabled>
+                                <span class="btn-icon">-</span>
+                                <span class="btn-text">Remove Selected</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="save-section">
+        <button type="submit" class="dashboard-btn save-btn">
+            <span class="btn-icon">💾</span>
+            <span class="btn-text">Save and Publish</span>
+        </button>
     </div>
-    
+</div>
 <?php elseif ($current_section === 'text_page'): ?>
     <!-- TEXT PAGE EDITOR -->
     <div class="dashboard-container">
@@ -897,7 +953,15 @@ $current_section = $_GET['section'] ?? 'dashboard';
 
 <?php endif; ?>
 
-// Replace the existing updatePreview function and add these new functions:
+<script>
+function updatePreview(input, previewId) {
+    const preview = document.getElementById(previewId);
+    if (preview) {
+        preview.src = input.value;
+        preview.style.display = input.value ? 'block' : 'none';
+    }
+}
+</script>
 
 <script>
 function updatePreview(input, previewId) {
