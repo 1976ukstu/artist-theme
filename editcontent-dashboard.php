@@ -8,6 +8,44 @@
 session_start();
 $correct_password = 'artist2025';
 
+// Handle file uploads
+if (isset($_FILES['uploaded_image']) && $_FILES['uploaded_image']['error'] === UPLOAD_ERR_OK) {
+    $upload_dir = 'images/';
+    
+    // Create images directory if it doesn't exist
+    if (!is_dir($upload_dir)) {
+        mkdir($upload_dir, 0755, true);
+    }
+    
+    $file = $_FILES['uploaded_image'];
+    $file_extension = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
+    
+    // Validate file type
+    $allowed_types = ['jpg', 'jpeg', 'png', 'gif', 'webp'];
+    if (!in_array($file_extension, $allowed_types)) {
+        echo json_encode(['success' => false, 'message' => 'Invalid file type']);
+        exit;
+    }
+    
+    // Generate unique filename
+    $timestamp = time();
+    $safe_name = preg_replace('/[^a-zA-Z0-9.-]/', '-', $file['name']);
+    $new_filename = "painting-{$timestamp}-{$safe_name}";
+    $upload_path = $upload_dir . $new_filename;
+    
+    // Move uploaded file
+    if (move_uploaded_file($file['tmp_name'], $upload_path)) {
+        echo json_encode([
+            'success' => true, 
+            'path' => $upload_path,
+            'message' => 'File uploaded successfully'
+        ]);
+    } else {
+        echo json_encode(['success' => false, 'message' => 'Upload failed']);
+    }
+    exit;
+}
+
 // Handle logout
 if (isset($_GET['logout'])) {
     session_destroy();
@@ -30,12 +68,17 @@ $is_authenticated = isset($_SESSION['authenticated']) && $_SESSION['authenticate
 if ($is_authenticated && $_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
     $content_file = 'gallery-content.json';
     
-    if ($_POST['action'] === 'save_gallery') {
-        // Save gallery content (existing functionality)
-        $content = json_decode(file_get_contents($content_file), true) ?: [];
-        
-        // Update paintings
-        for ($i = 1; $i <= 9; $i++) {
+   if ($_POST['action'] === 'save_gallery') {
+    // Save gallery content with NEW CARDS support
+    $content = json_decode(file_get_contents($content_file), true) ?: [];
+    
+    // Update existing paintings (1-9) AND new dynamic ones
+    $painting_count = 0;
+    foreach ($_POST as $key => $value) {
+        if (preg_match('/^painting_(\d+)_title$/', $key, $matches)) {
+            $i = $matches[1];
+            $painting_count = max($painting_count, $i);
+            
             if (isset($_POST["painting_{$i}_title"])) {
                 $content['paintings'][$i] = [
                     'title' => sanitize_text_field($_POST["painting_{$i}_title"]),
@@ -45,32 +88,14 @@ if ($is_authenticated && $_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['
                 ];
             }
         }
-        
-        // Update commissions
-        for ($i = 1; $i <= 9; $i++) {
-            if (isset($_POST["commission_{$i}_title"])) {
-                $content['commissions'][$i] = [
-                    'title' => sanitize_text_field($_POST["commission_{$i}_title"]),
-                    'description' => sanitize_textarea_field($_POST["commission_{$i}_description"]),
-                    'image' => sanitize_text_field($_POST["commission_{$i}_image"])
-                ];
-            }
-        }
-        
-        // Update small works
-        for ($i = 1; $i <= 9; $i++) {
-            if (isset($_POST["small_work_{$i}_title"])) {
-                $content['small_works'][$i] = [
-                    'title' => sanitize_text_field($_POST["small_work_{$i}_title"]),
-                    'description' => sanitize_textarea_field($_POST["small_work_{$i}_description"]),
-                    'image' => sanitize_text_field($_POST["small_work_{$i}_image"])
-                ];
-            }
-        }
-        
-        file_put_contents($content_file, json_encode($content, JSON_PRETTY_PRINT));
-        $success_message = 'Gallery content updated successfully!';
     }
+    
+    // Save total count for dynamic loading
+    $content['total_paintings'] = $painting_count;
+    
+    file_put_contents($content_file, json_encode($content, JSON_PRETTY_PRINT));
+    $success_message = "✨ Gallery updated successfully! New paintings are now live on your website!";
+}
     
     if ($_POST['action'] === 'save_text_page') {
         // Save text page content
@@ -117,7 +142,104 @@ $current_section = $_GET['section'] ?? 'dashboard';
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Artist Website Management Dashboard</title>
+    
     <style>
+/* ENHANCED BEAUTIFUL DASHBOARD BUTTONS - BIGGER & BETTER */
+.dashboard-btn {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 12px !important;
+    padding: 20px 35px !important; /* BIGGER: increased from 15px 25px */
+    border: none !important;
+    border-radius: 16px !important; /* MORE ROUNDED: increased from 12px */
+    font-size: 1.1rem !important; /* BIGGER TEXT: increased from 1rem */
+    font-weight: 600 !important; /* BOLDER: increased from 500 */
+    cursor: pointer !important;
+    transition: all 0.3s ease !important;
+    font-family: 'Helvetica', 'Helvetica Neue', Arial, sans-serif !important;
+    min-width: 200px !important; /* WIDER: increased from 160px */
+    min-height: 56px !important; /* TALLER: ensures perfect text centering */
+    text-decoration: none !important;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15) !important; /* BIGGER SHADOW */
+    text-align: center !important;
+    line-height: 1.2 !important; /* PERFECT TEXT CENTERING */
+}
+
+.add-btn {
+    background: linear-gradient(135deg, #27ae60 0%, #2ecc71 100%) !important;
+    color: white !important;
+    box-shadow: 0 6px 20px rgba(39, 174, 96, 0.3) !important; /* ENHANCED SHADOW */
+}
+
+.add-btn:hover {
+    transform: translateY(-3px) !important; /* BIGGER LIFT: increased from -2px */
+    box-shadow: 0 12px 35px rgba(39, 174, 96, 0.4) !important; /* DRAMATIC HOVER SHADOW */
+}
+
+.remove-btn {
+    background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%) !important;
+    color: white !important;
+    box-shadow: 0 6px 20px rgba(231, 76, 60, 0.3) !important;
+}
+
+.remove-btn:hover {
+    transform: translateY(-3px) !important;
+    box-shadow: 0 12px 35px rgba(231, 76, 60, 0.4) !important;
+}
+
+.save-btn {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+    color: white !important;
+    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.3) !important;
+    width: 100% !important;
+    font-size: 1.2rem !important; /* BIGGER SAVE BUTTON TEXT */
+    padding: 22px 40px !important; /* EXTRA BIG SAVE BUTTON */
+    min-height: 60px !important;
+}
+
+.save-btn:hover {
+    transform: translateY(-3px) !important;
+    box-shadow: 0 12px 35px rgba(102, 126, 234, 0.4) !important;
+}
+
+.btn-icon {
+    font-size: 1.4rem !important; /* BIGGER ICONS */
+    line-height: 1 !important;
+}
+
+.btn-text {
+    font-weight: 600 !important;
+    letter-spacing: 0.3px !important; /* SUBTLE LETTER SPACING */
+}
+</style>
+    
+<style>
+
+/* PERFECT INPUT FIELD ALIGNMENT */
+.form-group input,
+.form-group textarea {
+    width: 100% !important;
+    padding: 12px 15px !important;
+    border: 2px solid #e0e0e0 !important;
+    border-radius: 8px !important;
+    font-size: 14px !important;
+    transition: border-color 0.3s !important;
+    font-family: inherit !important;
+    box-sizing: border-box !important;
+    margin: 0 !important;
+}
+
+.form-group {
+    margin-bottom: 20px !important;
+    width: 100% !important;
+}
+
+.form-card {
+    padding: 25px !important;
+    box-sizing: border-box !important;
+}
+
         body, .dashboard-container, .login-container {
             margin: 0;
             padding: 0;
@@ -644,7 +766,9 @@ $current_section = $_GET['section'] ?? 'dashboard';
                 <input type="hidden" name="action" value="save_gallery">
                 
                 <div class="form-grid">
-                    <?php for ($i = 1; $i <= 9; $i++): 
+                    <?php 
+                    $total_paintings = $current_content['total_paintings'] ?? 9;
+                    for ($i = 1; $i <= $total_paintings; $i++): 
                         $painting = $current_content['paintings'][$i] ?? [];
                     ?>
                         <div class="form-card">
@@ -722,9 +846,7 @@ $current_section = $_GET['section'] ?? 'dashboard';
                 <input type="hidden" name="action" value="save_gallery">
                 
                 <div class="form-grid">
-                    <?php for ($i = 1; $i <= 9; $i++): 
-                        $commission = $current_content['commissions'][$i] ?? [];
-                    ?>
+                    <?php for ($i = 1; $i <= 9; $i++): ?>
                         <div class="form-card">
                             <h4>Commission Type <?php echo $i; ?></h4>
                             
@@ -1108,5 +1230,942 @@ function autoSave() {
     }, 30000);
 }
 </script>
+
+<script>
+// ==============================================
+//    MAGICAL "ADD CARD" FUNCTIONALITY
+// ==============================================
+
+// Modal HTML - we'll inject this dynamically
+const addPaintingModalHTML = `
+<div class="modal-overlay" id="add-painting-modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3>✨ Add New Painting</h3>
+            <button class="modal-close" id="close-add-modal">×</button>
+        </div>
+        <div class="modal-body">
+            <form id="add-painting-form">
+                <div class="form-group">
+                    <label for="new-painting-title">🎨 Painting Title *</label>
+                    <input type="text" id="new-painting-title" name="title" required 
+                           placeholder="Enter the title of your painting">
+                </div>
+                
+                <div class="form-group">
+                    <label for="new-painting-subtitle">📏 Medium & Dimensions *</label>
+                    <input type="text" id="new-painting-subtitle" name="subtitle" required 
+                           placeholder="e.g., Oil on Canvas, 150cm x 150cm">
+                </div>
+                
+                <div class="form-group">
+                    <label for="new-painting-description">📝 Description *</label>
+                    <textarea id="new-painting-description" name="description" rows="4" required 
+                              placeholder="Tell the story of this painting..."></textarea>
+                </div>
+                
+                <div class="form-group">
+    <label for="new-painting-image">🖼️ Image Upload *</label>
+    
+    <div class="drag-drop-zone" id="drag-drop-zone">
+        <div class="drag-drop-content">
+            <div class="upload-icon">📤</div>
+            <p class="upload-text">Drag & drop your image here</p>
+            <p class="upload-or">or</p>
+            <button type="button" class="browse-btn" onclick="document.getElementById('file-input').click()">Browse Files</button>
+            <input type="file" id="file-input" accept="image/*" style="display: none;">
+        </div>
+        
+        <div class="upload-progress" id="upload-progress" style="display: none;">
+            <div class="progress-bar" id="progress-bar"></div>
+            <span class="progress-text" id="progress-text">0%</span>
+        </div>
+        
+        <div class="upload-success" id="upload-success" style="display: none;">
+            <span class="success-icon">✅</span>
+            <span class="success-text">Image uploaded successfully!</span>
+        </div>
+    </div>
+    
+    <input type="text" id="new-painting-image" name="image" required 
+           placeholder="Auto-generated path will appear here" readonly style="margin-top: 15px;">
+    
+    <div class="image-preview-container">
+        <img id="new-painting-preview" class="new-image-preview" style="display: none;">
+    </div>
+</div>
+                
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="dashboard-btn secondary-btn" id="cancel-add-painting">Cancel</button>
+            <button type="button" class="dashboard-btn add-btn" id="confirm-add-painting">
+                <span class="btn-icon">✨</span>
+                <span class="btn-text">Add This Painting</span>
+            </button>
+        </div>
+    </div>
+</div>`;
+
+// Beautiful Modal CSS
+const modalCSS = `
+<style>
+/* STUNNING MODAL STYLES */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(5px);
+    z-index: 10000;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.modal-overlay.active {
+    display: flex;
+    opacity: 1;
+}
+
+.modal-content {
+    background: white;
+    border-radius: 20px;
+    max-width: 700px;
+    width: 90%;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.3);
+    transform: scale(0.9) translateY(30px);
+    transition: transform 0.3s ease;
+}
+
+.modal-overlay.active .modal-content {
+    transform: scale(1) translateY(0);
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 30px 35px;
+    border-bottom: 2px solid #f0f0f0;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border-radius: 20px 20px 0 0;
+}
+
+.modal-header h3 {
+    font-size: 1.8rem;
+    margin: 0;
+    font-weight: 500;
+}
+
+.modal-close {
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+    font-size: 1.8rem;
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    padding: 8px 12px;
+    border-radius: 10px;
+    line-height: 1;
+}
+
+.modal-close:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: scale(1.1);
+}
+
+.modal-body {
+    padding: 35px;
+}
+
+.modal-body .form-group {
+    margin-bottom: 25px;
+}
+
+.modal-body .form-group label {
+    display: block;
+    font-weight: 600;
+    color: #2c3e50;
+    margin-bottom: 10px;
+    font-size: 1.1rem;
+}
+
+.modal-body .form-group input,
+.modal-body .form-group textarea {
+    width: 100%;
+    padding: 15px 18px;
+    border: 2px solid #e0e0e0;
+    border-radius: 12px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    font-family: 'Helvetica', 'Helvetica Neue', Arial, sans-serif;
+    box-sizing: border-box;
+}
+
+.modal-body .form-group input:focus,
+.modal-body .form-group textarea:focus {
+    outline: none;
+    border-color: #667eea;
+    box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1);
+    transform: translateY(-1px);
+}
+
+.form-help {
+    display: block;
+    font-size: 0.9rem;
+    color: #666;
+    margin-top: 8px;
+    font-style: italic;
+}
+
+.new-image-preview {
+    width: 100%;
+    max-width: 300px;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 12px;
+    margin-top: 15px;
+    border: 3px solid #e0e0e0;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+}
+
+.modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 15px;
+    padding: 30px 35px;
+    border-top: 2px solid #f0f0f0;
+    background: #f8f9fa;
+    border-radius: 0 0 20px 20px;
+}
+
+.secondary-btn {
+    background: #6c757d !important;
+    color: white !important;
+}
+
+.secondary-btn:hover {
+    background: #5a6268 !important;
+    transform: translateY(-2px) !important;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .modal-content {
+        width: 95%;
+        margin: 20px;
+    }
+    
+    .modal-header,
+    .modal-body,
+    .modal-footer {
+        padding: 25px;
+    }
+    
+    .modal-footer {
+        flex-direction: column;
+    }
+    
+    .modal-footer .dashboard-btn {
+        width: 100%;
+    }
+}
+</style>`;
+
+// Inject modal CSS and HTML when page loads
+document.addEventListener('DOMContentLoaded', function() {
+    // Add modal CSS to head
+    document.head.insertAdjacentHTML('beforeend', modalCSS);
+    
+    // Add modal HTML to body
+    document.body.insertAdjacentHTML('beforeend', addPaintingModalHTML);
+    
+    // Get modal elements
+    const modal = document.getElementById('add-painting-modal');
+    const addBtn = document.getElementById('add-card-btn');
+    const closeBtn = document.getElementById('close-add-modal');
+    const cancelBtn = document.getElementById('cancel-add-painting');
+    const confirmBtn = document.getElementById('confirm-add-painting');
+    const imageInput = document.getElementById('new-painting-image');
+    const imagePreview = document.getElementById('new-painting-preview');
+    
+    // Open modal when "Add New Painting" is clicked
+    if (addBtn) {
+        addBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden'; // Prevent background scrolling
+        });
+    }
+    
+    // Close modal functions
+    function closeModal() {
+        modal.classList.remove('active');
+        document.body.style.overflow = ''; // Restore scrolling
+        // Clear form
+        document.getElementById('add-painting-form').reset();
+        imagePreview.style.display = 'none';
+    }
+    
+    // Close modal events
+    closeBtn.addEventListener('click', closeModal);
+    cancelBtn.addEventListener('click', closeModal);
+    
+    // Close modal when clicking outside
+    modal.addEventListener('click', function(e) {
+        if (e.target === modal) {
+            closeModal();
+        }
+    });
+    
+    // Close modal with Escape key
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && modal.classList.contains('active')) {
+            closeModal();
+        }
+    });
+    
+    // Image preview functionality
+    imageInput.addEventListener('input', function() {
+        if (this.value) {
+            imagePreview.src = this.value;
+            imagePreview.style.display = 'block';
+        } else {
+            imagePreview.style.display = 'none';
+        }
+    });
+    
+    // Add painting functionality
+    confirmBtn.addEventListener('click', function() {
+        const title = document.getElementById('new-painting-title').value.trim();
+        const subtitle = document.getElementById('new-painting-subtitle').value.trim();
+        const description = document.getElementById('new-painting-description').value.trim();
+        const image = document.getElementById('new-painting-image').value.trim();
+        
+        // Validate required fields
+        if (!title || !subtitle || !description || !image) {
+            alert('🚨 Please fill in all required fields!');
+            return;
+        }
+        
+        // Success notification
+        showSuccessNotification('🎨 New painting added successfully! Save and publish to make it live.');
+        
+        // Add new form card to the grid (visual feedback)
+        addNewPaintingCard(title, subtitle, description, image);
+        
+        // Close modal
+        closeModal();
+    });
+    
+    // Success notification function
+    function showSuccessNotification(message) {
+        const notification = document.createElement('div');
+        notification.className = 'success-notification';
+        notification.innerHTML = `
+            <div class="notification-content">
+                <span class="notification-icon">✨</span>
+                <span class="notification-text">${message}</span>
+                <button class="notification-close">×</button>
+            </div>
+        `;
+        
+        // Add notification styles
+        const notificationCSS = `
+            <style>
+            .success-notification {
+                position: fixed;
+                top: 30px;
+                right: 30px;
+                background: linear-gradient(135deg, #27ae60 0%, #2ecc71 100%);
+                color: white;
+                padding: 20px 25px;
+                border-radius: 15px;
+                box-shadow: 0 10px 30px rgba(39, 174, 96, 0.3);
+                z-index: 10001;
+                transform: translateX(400px);
+                transition: transform 0.4s ease;
+                max-width: 400px;
+            }
+            
+            .success-notification.show {
+                transform: translateX(0);
+            }
+            
+            .notification-content {
+                display: flex;
+                align-items: center;
+                gap: 15px;
+            }
+            
+            .notification-icon {
+                font-size: 1.5rem;
+            }
+            
+            .notification-text {
+                flex: 1;
+                font-weight: 500;
+            }
+            
+            .notification-close {
+                background: rgba(255, 255, 255, 0.2);
+                border: none;
+                color: white;
+                font-size: 1.2rem;
+                cursor: pointer;
+                padding: 5px 8px;
+                border-radius: 5px;
+                transition: background 0.3s ease;
+            }
+            
+            .notification-close:hover {
+                background: rgba(255, 255, 255, 0.3);
+            }
+            </style>
+        `;
+        
+        if (!document.querySelector('.notification-styles')) {
+            const styleTag = document.createElement('style');
+            styleTag.className = 'notification-styles';
+            styleTag.innerHTML = notificationCSS.replace('<style>', '').replace('</style>', '');
+            document.head.appendChild(styleTag);
+        }
+        
+        document.body.appendChild(notification);
+        
+        // Show notification
+        setTimeout(() => notification.classList.add('show'), 100);
+        
+        // Auto-hide after 5 seconds
+        setTimeout(() => {
+            notification.classList.remove('show');
+            setTimeout(() => notification.remove(), 400);
+        }, 5000);
+        
+        // Manual close
+        notification.querySelector('.notification-close').addEventListener('click', () => {
+            notification.classList.remove('show');
+            setTimeout(() => notification.remove(), 400);
+        });
+    }
+    
+    // Add new painting card to grid (visual feedback)
+    function addNewPaintingCard(title, subtitle, description, image) {
+        const formGrid = document.querySelector('.form-grid');
+        const newCardIndex = formGrid.children.length + 1;
+        
+        const newCard = document.createElement('div');
+        newCard.className = 'form-card new-card';
+        newCard.innerHTML = `
+            <h4>Painting ${newCardIndex} <span style="color: #27ae60; font-size: 0.8em;">✨ NEW</span></h4>
+            
+            <div class="form-group">
+                <label>Title:</label>
+                <input type="text" name="painting_${newCardIndex}_title" value="${title}">
+            </div>
+            
+            <div class="form-group">
+                <label>Medium & Dimensions:</label>
+                <input type="text" name="painting_${newCardIndex}_subtitle" value="${subtitle}">
+            </div>
+            
+            <div class="form-group">
+                <label>Description:</label>
+                <textarea name="painting_${newCardIndex}_description" rows="4">${description}</textarea>
+            </div>
+            
+            <div class="form-group">
+                <label>Image Path:</label>
+                <input type="text" name="painting_${newCardIndex}_image" value="${image}">
+                <img src="${image}" alt="Preview" class="image-preview">
+            </div>
+        `;
+        
+        // Add entrance animation
+        newCard.style.opacity = '0';
+        newCard.style.transform = 'translateY(30px)';
+        newCard.style.transition = 'all 0.5s ease';
+        
+        formGrid.appendChild(newCard);
+        
+        // Animate in
+        setTimeout(() => {
+            newCard.style.opacity = '1';
+            newCard.style.transform = 'translateY(0)';
+        }, 100);
+        
+        // Highlight briefly
+        setTimeout(() => {
+            newCard.style.background = '#e8f5e8';
+            setTimeout(() => {
+                newCard.style.background = '#f8f9fa';
+            }, 2000);
+        }, 600);
+    }
+});
+
+// ==============================================
+//    "REMOVE SELECTED" FUNCTIONALITY
+// ==============================================
+
+// Add selection functionality to cards
+document.addEventListener('DOMContentLoaded', function() {
+    addSelectionFunctionality();
+    setupRemoveSelectedButton();
+});
+
+function addSelectionFunctionality() {
+    // Add selection checkboxes to all cards
+    const formCards = document.querySelectorAll('.form-card');
+    
+    formCards.forEach((card, index) => {
+        // Skip if already has checkbox
+        if (card.querySelector('.card-selector')) return;
+        
+        const cardNumber = index + 1;
+        
+        // Create selection checkbox
+        const selectorHTML = `
+            <div class="card-selection-container">
+                <label class="card-selector">
+                    <input type="checkbox" class="card-checkbox" data-card="${cardNumber}">
+                    <span class="checkbox-custom"></span>
+                    <span class="selector-text">Select for removal</span>
+                </label>
+            </div>
+        `;
+        
+        // Add to top of card
+        card.insertAdjacentHTML('afterbegin', selectorHTML);
+        
+        // Add selection styling
+        const checkbox = card.querySelector('.card-checkbox');
+        checkbox.addEventListener('change', function() {
+            if (this.checked) {
+                card.classList.add('selected-for-removal');
+            } else {
+                card.classList.remove('selected-for-removal');
+            }
+            updateRemoveButton();
+        });
+    });
+    
+    // Add selection CSS
+    if (!document.querySelector('.selection-styles')) {
+        const selectionCSS = `
+            <style class="selection-styles">
+            .card-selection-container {
+                margin-bottom: 15px;
+                padding-bottom: 15px;
+                border-bottom: 2px solid #f0f0f0;
+            }
+            
+            .card-selector {
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                cursor: pointer;
+                padding: 8px 12px;
+                background: rgba(231, 76, 60, 0.1);
+                border-radius: 8px;
+                transition: all 0.3s ease;
+                font-size: 14px;
+                font-weight: 500;
+            }
+            
+            .card-selector:hover {
+                background: rgba(231, 76, 60, 0.15);
+            }
+            
+            .card-checkbox {
+                width: 18px;
+                height: 18px;
+                cursor: pointer;
+            }
+            
+            .selector-text {
+                color: #e74c3c;
+                font-weight: 500;
+            }
+            
+            .selected-for-removal {
+                background: rgba(231, 76, 60, 0.1) !important;
+                border: 3px solid #e74c3c !important;
+                transform: scale(0.98);
+                opacity: 0.8;
+            }
+            
+            .selected-for-removal h4 {
+                color: #e74c3c !important;
+            }
+            
+            .selected-for-removal .card-selector {
+                background: rgba(231, 76, 60, 0.2);
+            }
+            
+            .remove-selected-active {
+                background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%) !important;
+                color: white !important;
+                cursor: pointer !important;
+                opacity: 1 !important;
+            }
+            
+            .remove-selected-disabled {
+                opacity: 0.5 !important;
+                cursor: not-allowed !important;
+            }
+            </style>
+        `;
+        document.head.insertAdjacentHTML('beforeend', selectionCSS);
+    }
+}
+
+function setupRemoveSelectedButton() {
+    const removeBtn = document.getElementById('remove-card-btn');
+    if (!removeBtn) return;
+    
+    removeBtn.addEventListener('click', function() {
+        const selectedCards = document.querySelectorAll('.card-checkbox:checked');
+        
+        if (selectedCards.length === 0) {
+            alert('🚨 Please select at least one painting to remove!');
+            return;
+        }
+        
+        // Get selected card numbers
+        const cardNumbers = Array.from(selectedCards).map(cb => cb.dataset.card);
+        const cardNames = cardNumbers.map(num => {
+            const titleInput = document.querySelector(`input[name="painting_${num}_title"]`);
+            return titleInput ? titleInput.value || `Painting ${num}` : `Painting ${num}`;
+        });
+        
+        // Confirmation dialog
+        const confirmMessage = `🗑️ Are you sure you want to remove these ${selectedCards.length} painting(s)?\n\n${cardNames.join('\n')}\n\n⚠️ This action cannot be undone!`;
+        
+        if (confirm(confirmMessage)) {
+            // Remove selected cards with animation
+            selectedCards.forEach((checkbox, index) => {
+                const card = checkbox.closest('.form-card');
+                
+                // Animate out
+                card.style.transition = 'all 0.5s ease';
+                card.style.transform = 'translateX(-100%)';
+                card.style.opacity = '0';
+                
+                // Remove from DOM after animation
+                setTimeout(() => {
+                    card.remove();
+                    
+                    // Show success notification when last card is removed
+                    if (index === selectedCards.length - 1) {
+                        showSuccessNotification(`🗑️ ${selectedCards.length} painting(s) removed successfully! Don't forget to Save and Publish.`);
+                        updateRemoveButton();
+                    }
+                }, 500);
+            });
+        }
+    });
+}
+
+function updateRemoveButton() {
+    const removeBtn = document.getElementById('remove-card-btn');
+    const selectedCards = document.querySelectorAll('.card-checkbox:checked');
+    
+    if (selectedCards.length > 0) {
+        removeBtn.disabled = false;
+        removeBtn.classList.remove('remove-selected-disabled');
+        removeBtn.classList.add('remove-selected-active');
+        removeBtn.innerHTML = `
+            <span class="btn-icon">🗑️</span>
+            <span class="btn-text">Remove ${selectedCards.length} Selected</span>
+        `;
+    } else {
+        removeBtn.disabled = true;
+        removeBtn.classList.add('remove-selected-disabled');
+        removeBtn.classList.remove('remove-selected-active');
+        removeBtn.innerHTML = `
+            <span class="btn-icon">-</span>
+            <span class="btn-text">Remove Selected</span>
+        `;
+    }
+}
+
+// ==============================================
+//    DRAG & DROP FUNCTIONALITY
+// ==============================================
+
+document.addEventListener('DOMContentLoaded', function() {
+    setupDragAndDrop();
+});
+
+function setupDragAndDrop() {
+    const dragDropZone = document.getElementById('drag-drop-zone');
+    const fileInput = document.getElementById('file-input');
+    const uploadProgress = document.getElementById('upload-progress');
+    const progressBar = document.getElementById('progress-bar');
+    const progressText = document.getElementById('progress-text');
+    const uploadSuccess = document.getElementById('upload-success');
+    const imagePathInput = document.getElementById('new-painting-image');
+    const imagePreview = document.getElementById('new-painting-preview');
+    
+    if (!dragDropZone || !fileInput) return;
+    
+    // Prevent default drag behaviors
+    ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+        dragDropZone.addEventListener(eventName, preventDefaults, false);
+        document.body.addEventListener(eventName, preventDefaults, false);
+    });
+    
+    function preventDefaults(e) {
+        e.preventDefault();
+        e.stopPropagation();
+    }
+    
+    // Highlight drop zone when item is dragged over it
+    ['dragenter', 'dragover'].forEach(eventName => {
+        dragDropZone.addEventListener(eventName, highlight, false);
+    });
+    
+    ['dragleave', 'drop'].forEach(eventName => {
+        dragDropZone.addEventListener(eventName, unhighlight, false);
+    });
+    
+    function highlight() {
+        dragDropZone.classList.add('dragover');
+    }
+    
+    function unhighlight() {
+        dragDropZone.classList.remove('dragover');
+    }
+    
+    // Handle dropped files
+    dragDropZone.addEventListener('drop', handleDrop, false);
+    
+    function handleDrop(e) {
+        const dt = e.dataTransfer;
+        const files = dt.files;
+        handleFiles(files);
+    }
+    
+    // Handle browse button selection
+    fileInput.addEventListener('change', function(e) {
+        handleFiles(this.files);
+    });
+    
+    // Main file handling function
+    function handleFiles(files) {
+        if (files.length === 0) return;
+        
+        const file = files[0];
+        
+        // Validate file type
+        if (!file.type.startsWith('image/')) {
+            alert('❌ Please select an image file (JPG, PNG, GIF, WebP)');
+            return;
+        }
+        
+        // Validate file size (10MB limit)
+        if (file.size > 10 * 1024 * 1024) {
+            alert('❌ File size must be less than 10MB');
+            return;
+        }
+        
+        // Show upload progress
+        uploadProgress.style.display = 'block';
+        uploadSuccess.style.display = 'none';
+        
+        // Simulate upload progress (in real world, this would be actual upload)
+        simulateUpload(file);
+    }
+    
+    function simulateUpload(file) {
+        let progress = 0;
+        
+        const uploadInterval = setInterval(() => {
+            progress += Math.random() * 25 + 5; // Random progress between 5-30%
+            if (progress > 100) progress = 100;
+            
+            progressBar.style.width = progress + '%';
+            progressText.textContent = Math.round(progress) + '%';
+            
+            if (progress >= 100) {
+                clearInterval(uploadInterval);
+                completeUpload(file);
+            }
+        }, 150);
+    }
+    
+    function completeUpload(file) {
+    // Create FormData for actual file upload
+    const formData = new FormData();
+    formData.append('uploaded_image', file);
+    
+    // Upload to server
+    fetch(window.location.pathname, {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            // Hide progress, show success
+            uploadProgress.style.display = 'none';
+            uploadSuccess.style.display = 'block';
+            
+            // Update the path input with real server path
+            imagePathInput.value = data.path;
+            
+            // Show image preview
+            imagePreview.src = data.path;
+            imagePreview.style.display = 'block';
+            
+            // Hide success message after 3 seconds
+            setTimeout(() => {
+                uploadSuccess.style.display = 'none';
+            }, 3000);
+        } else {
+            alert('Upload failed: ' + data.message);
+            uploadProgress.style.display = 'none';
+        }
+    })
+    .catch(error => {
+        console.error('Upload error:', error);
+        alert('Upload failed. Please try again.');
+        uploadProgress.style.display = 'none';
+    });
+}
+
+// Add enhanced drag & drop CSS
+const dragDropCSS = `
+<style>
+.drag-drop-zone {
+    border: 3px dashed #ccc;
+    border-radius: 15px;
+    padding: 40px 20px;
+    text-align: center;
+    background: #f8f9fa;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.drag-drop-zone:hover {
+    border-color: #667eea;
+    background: #f0f2ff;
+}
+
+.drag-drop-zone.dragover {
+    border-color: #667eea;
+    background: #e8ebff;
+    transform: scale(1.02);
+    border-style: solid;
+}
+
+.drag-drop-content {
+    pointer-events: none;
+}
+
+.upload-icon {
+    font-size: 3rem;
+    color: #667eea;
+    margin-bottom: 15px;
+    display: block;
+}
+
+.upload-text {
+    font-size: 1.2rem;
+    color: #333;
+    margin: 10px 0;
+    font-weight: 500;
+}
+
+.upload-or {
+    color: #666;
+    margin: 15px 0;
+    font-size: 1rem;
+}
+
+.browse-btn {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    pointer-events: auto;
+}
+
+.browse-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+}
+
+.upload-progress {
+    background: #f0f0f0;
+    border-radius: 10px;
+    padding: 15px;
+    margin-top: 15px;
+}
+
+.progress-bar {
+    height: 20px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 10px;
+    width: 0%;
+    transition: width 0.3s ease;
+    position: relative;
+}
+
+.progress-text {
+    display: block;
+    text-align: center;
+    font-weight: bold;
+    color: #333;
+    margin-top: 10px;
+}
+
+.upload-success {
+    background: linear-gradient(135deg, #27ae60 0%, #2ecc71 100%);
+    color: white;
+    padding: 15px;
+    border-radius: 10px;
+    margin-top: 15px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    justify-content: center;
+}
+
+.success-icon {
+    font-size: 1.5rem;
+}
+
+.success-text {
+    font-weight: 500;
+}
+</style>`;
+
+// Inject the CSS
+if (!document.querySelector('.drag-drop-styles')) {
+    const styleTag = document.createElement('style');
+    styleTag.className = 'drag-drop-styles';
+    styleTag.innerHTML = dragDropCSS.replace('<style>', '').replace('</style>', '');
+    document.head.appendChild(styleTag);
+}
+
+}
+
+</script>
+
 </body>
 </html>

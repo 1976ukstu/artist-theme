@@ -3423,9 +3423,208 @@ body .save-btn:hover {
     box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4) !important;
 }
 
-/* TEMPORARY TEST - REMOVE AFTER TESTING */
-.dashboard-btn {
-    background: red !important;
+/* ==============================================
+   FINAL DASHBOARD BUTTON OVERRIDE - GUARANTEED STYLING
+   ============================================== */
+
+/* Maximum specificity override for dashboard buttons */
+body .dashboard-container .dashboard-actions .dashboard-btn,
+body .content-editor .dashboard-actions .dashboard-btn,
+form .dashboard-actions .dashboard-btn {
+    background: #ccc !important; /* This will be overridden by specific button styles below */
     color: white !important;
-    padding: 20px !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 10px !important;
+    padding: 15px 25px !important;
+    border: none !important;
+    border-radius: 12px !important;
+    font-size: 1rem !important;
+    font-weight: 500 !important;
+    cursor: pointer !important;
+    transition: all 0.3s ease !important;
+    font-family: 'Helvetica', 'Helvetica Neue', Arial, sans-serif !important;
+    min-width: 160px !important;
+    justify-content: center !important;
+    text-decoration: none !important;
+}
+
+/* Green Add Button */
+body .dashboard-container .dashboard-actions .add-btn,
+body .content-editor .dashboard-actions .add-btn,
+form .dashboard-actions .add-btn {
+    background: linear-gradient(135deg, #27ae60 0%, #2ecc71 100%) !important;
+    color: white !important;
+    box-shadow: 0 4px 15px rgba(39, 174, 96, 0.3) !important;
+}
+
+body .dashboard-container .dashboard-actions .add-btn:hover,
+body .content-editor .dashboard-actions .add-btn:hover,
+form .dashboard-actions .add-btn:hover {
+    transform: translateY(-2px) !important;
+    box-shadow: 0 8px 25px rgba(39, 174, 96, 0.4) !important;
+}
+
+/* Red Remove Button */
+body .dashboard-container .dashboard-actions .remove-btn,
+body .content-editor .dashboard-actions .remove-btn,
+form .dashboard-actions .remove-btn {
+    background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%) !important;
+    color: white !important;
+    box-shadow: 0 4px 15px rgba(231, 76, 60, 0.3) !important;
+}
+
+body .dashboard-container .dashboard-actions .remove-btn:hover,
+body .content-editor .dashboard-actions .remove-btn:hover,
+form .dashboard-actions .remove-btn:hover {
+    transform: translateY(-2px) !important;
+    box-shadow: 0 8px 25px rgba(231, 76, 60, 0.4) !important;
+}
+
+/* Purple Save Button */
+body .dashboard-container .dashboard-actions .save-btn,
+body .content-editor .dashboard-actions .save-btn,
+form .dashboard-actions .save-btn {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+    color: white !important;
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3) !important;
+    width: 100% !important;
+    font-size: 1.1rem !important;
+    padding: 18px 30px !important;
+}
+
+body .dashboard-container .dashboard-actions .save-btn:hover,
+body .content-editor .dashboard-actions .save-btn:hover,
+form .dashboard-actions .save-btn:hover {
+    transform: translateY(-2px) !important;
+    box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4) !important;
+}
+
+/* Enhanced Dashboard Actions Container */
+body .dashboard-container .dashboard-actions,
+body .content-editor .dashboard-actions,
+form .dashboard-actions {
+    display: grid !important;
+    grid-template-columns: 2fr 1fr !important;
+    gap: 30px !important;
+    margin: 40px 0 !important;
+    padding: 30px !important;
+    background: rgba(255, 255, 255, 0.95) !important;
+    border-radius: 15px !important;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* ==============================================
+   ULTIMATE NUCLEAR DASHBOARD BUTTON OVERRIDE
+   ============================================== */
+
+/* Absolutely force these styles with !important on everything */
+html body .dashboard-actions .dashboard-btn,
+html body .dashboard-actions button,
+html body form .dashboard-actions .dashboard-btn,
+html body form .dashboard-actions button,
+html body .content-editor .dashboard-actions .dashboard-btn,
+html body .content-editor .dashboard-actions button {
+    background: #999 !important;
+    color: white !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 10px !important;
+    padding: 15px 25px !important;
+    border: none !important;
+    border-radius: 12px !important;
+    font-size: 1rem !important;
+    font-weight: 500 !important;
+    cursor: pointer !important;
+    transition: all 0.3s ease !important;
+    font-family: Arial, sans-serif !important;
+    min-width: 160px !important;
+    justify-content: center !important;
+    text-decoration: none !important;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2) !important;
+    margin: 0 !important;
+    line-height: 1 !important;
+}
+
+/* FORCE GREEN ADD BUTTONS */
+html body .dashboard-actions .add-btn,
+html body form .dashboard-actions .add-btn,
+html body .content-editor .dashboard-actions .add-btn {
+    background: linear-gradient(135deg, #27ae60 0%, #2ecc71 100%) !important;
+    color: white !important;
+    box-shadow: 0 4px 15px rgba(39, 174, 96, 0.3) !important;
+}
+
+html body .dashboard-actions .add-btn:hover,
+html body form .dashboard-actions .add-btn:hover,
+html body .content-editor .dashboard-actions .add-btn:hover {
+    transform: translateY(-2px) !important;
+    box-shadow: 0 8px 25px rgba(39, 174, 96, 0.4) !important;
+}
+
+/* FORCE RED REMOVE BUTTONS */
+html body .dashboard-actions .remove-btn,
+html body form .dashboard-actions .remove-btn,
+html body .content-editor .dashboard-actions .remove-btn {
+    background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%) !important;
+    color: white !important;
+    box-shadow: 0 4px 15px rgba(231, 76, 60, 0.3) !important;
+}
+
+html body .dashboard-actions .remove-btn:hover,
+html body form .dashboard-actions .remove-btn:hover,
+html body .content-editor .dashboard-actions .remove-btn:hover {
+    transform: translateY(-2px) !important;
+    box-shadow: 0 8px 25px rgba(231, 76, 60, 0.4) !important;
+}
+
+/* FORCE PURPLE SAVE BUTTONS */
+html body .dashboard-actions .save-btn,
+html body form .dashboard-actions .save-btn,
+html body .content-editor .dashboard-actions .save-btn {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+    color: white !important;
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3) !important;
+    width: 100% !important;
+    font-size: 1.1rem !important;
+    padding: 18px 30px !important;
+}
+
+html body .dashboard-actions .save-btn:hover,
+html body form .dashboard-actions .save-btn:hover,
+html body .content-editor .dashboard-actions .save-btn:hover {
+    transform: translateY(-2px) !important;
+    box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4) !important;
+}
+
+/* FORCE DASHBOARD ACTIONS CONTAINER */
+html body .dashboard-actions,
+html body form .dashboard-actions,
+html body .content-editor .dashboard-actions {
+    display: grid !important;
+    grid-template-columns: 2fr 1fr !important;
+    gap: 30px !important;
+    margin: 40px 0 !important;
+    padding: 30px !important;
+    background: rgba(255, 255, 255, 0.95) !important;
+    border-radius: 15px !important;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* MOBILE RESPONSIVE OVERRIDE */
+@media (max-width: 768px) {
+    html body .dashboard-actions,
+    html body form .dashboard-actions,
+    html body .content-editor .dashboard-actions {
+        grid-template-columns: 1fr !important;
+        gap: 20px !important;
+        padding: 20px !important;
+    }
+    
+    html body .dashboard-actions .dashboard-btn,
+    html body form .dashboard-actions .dashboard-btn,
+    html body .content-editor .dashboard-actions .dashboard-btn {
+        width: 100% !important;
+        min-width: auto !important;
+    }
 }

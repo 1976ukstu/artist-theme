@@ -52,7 +52,7 @@ get_header(); ?>
                     $paintings = $gallery_content['paintings'] ?? [];
                     
                     // Render each painting
-                    for ($i = 1; $i <= 9; $i++) {
+                    for ($i = 1; $i <= ($gallery_content['total_paintings'] ?? 9); $i++) {
                         if (isset($paintings[$i])) {
                             echo render_painting_item($paintings[$i], $i);
                         }
