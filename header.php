@@ -35,14 +35,30 @@
 
 		<nav id="site-navigation" class="main-navigation">
 			<button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false"><?php esc_html_e( 'Primary Menu', 'artist-theme' ); ?></button>
-			<?php
-			wp_nav_menu(
-				array(
-					'theme_location' => 'menu-1',
-					'menu_id'        => 'primary-menu',
-					'fallback_cb'    => false,
-				)
-			);
-			?>
+	<?php
+wp_nav_menu(
+    array(
+        'theme_location' => 'menu-1',
+        'menu_id'        => 'primary-menu',
+        'fallback_cb'    => false,
+    )
+);
+?>
+
+<?php if (is_user_logged_in() && current_user_can('administrator')): ?>
+    <a href="<?php echo get_template_directory_uri(); ?>/editcontent-dashboard.php" 
+       style="position: fixed; bottom: 20px; right: 20px; 
+              background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%); 
+              color: white; padding: 15px; border-radius: 50%; 
+              text-decoration: none; z-index: 9999; font-size: 1.3rem; 
+              box-shadow: 0 6px 20px rgba(231, 76, 60, 0.4);
+              transition: all 0.3s ease; border: 3px solid white;"
+       onmouseover="this.style.transform='scale(1.15)';"
+       onmouseout="this.style.transform='scale(1)';"
+       title="Artist Dashboard">
+        ⚙️
+    </a>
+<?php endif; ?>
+
 		</nav><!-- #site-navigation -->
 	</header><!-- #masthead -->
