@@ -3713,3 +3713,57 @@ html {
     scrollbar-width: thin;
     scrollbar-color: #667eea rgba(0,0,0,0.1); /* Firefox only */
 }
+
+/* FORCE MOBILE NAVIGATION SCROLLING - CRITICAL */
+@media screen and (max-height: 600px) and (orientation: landscape) {
+    .main-navigation .menu {
+        max-height: 70vh !important;
+        overflow-y: auto !important;
+        overflow-x: hidden !important;
+        -webkit-overflow-scrolling: touch !important;
+        border-radius: 8px !important;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.1) !important;
+    }
+    
+    .main-navigation ul {
+        max-height: none !important;
+        padding-bottom: 20px !important;
+    }
+}
+
+/* FORCE GEAR ICON VISIBILITY */
+a[title="Artist Dashboard"] {
+    display: block !important;
+    position: fixed !important;
+    bottom: 20px !important;
+    right: 20px !important;
+    z-index: 99999 !important;
+}
+
+/* CRITICAL: MOBILE SCROLL FIX - FORCE LOAD */
+@media screen and (max-height: 600px) and (orientation: landscape) {
+    .main-navigation .menu,
+    .main-navigation ul,
+    #primary-menu {
+        max-height: 70vh !important;
+        overflow-y: auto !important;
+        overflow-x: hidden !important;
+        -webkit-overflow-scrolling: touch !important;
+        scrollbar-width: thin !important;
+    }
+}
+
+/* GEAR ICON FORCE VISIBILITY */
+a[title="Artist Dashboard"] {
+    position: fixed !important;
+    bottom: 20px !important;
+    right: 20px !important;
+    z-index: 999999 !important;
+    display: block !important;
+    background: #e74c3c !important;
+    color: white !important;
+    padding: 15px !important;
+    border-radius: 50% !important;
+    text-decoration: none !important;
+    font-size: 1.3rem !important;
+}

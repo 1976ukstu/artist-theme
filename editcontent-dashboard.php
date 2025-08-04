@@ -12,29 +12,29 @@ $correct_password = 'artist2025';
 if (isset($_FILES['uploaded_image']) && $_FILES['uploaded_image']['error'] === UPLOAD_ERR_OK) {
     $upload_dir = 'images/';
     
-// Create images directory if it doesn't exist
+    // Create images directory if it doesn't exist
     if (!is_dir($upload_dir)) {
-    mkdir($upload_dir, 0755, true);
-}
+        mkdir($upload_dir, 0755, true);
+    }
     
-$file = $_FILES['uploaded_image'];
-$file_extension = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
+    $file = $_FILES['uploaded_image'];
+    $file_extension = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
     
-// Validate file type
+    // Validate file type
     $allowed_types = ['jpg', 'jpeg', 'png', 'gif', 'webp'];
     if (!in_array($file_extension, $allowed_types)) {
         echo json_encode(['success' => false, 'message' => 'Invalid file type']);
         exit;
-}
+    }
     
- // Generate unique filename
+    // Generate unique filename
     $timestamp = time();
     $safe_name = preg_replace('/[^a-zA-Z0-9.-]/', '-', $file['name']);
     $new_filename = "painting-{$timestamp}-{$safe_name}";
     $upload_path = $upload_dir . $new_filename;
     
-// Move uploaded file
-if (move_uploaded_file($file['tmp_name'], $upload_path)) {
+    // Move uploaded file
+    if (move_uploaded_file($file['tmp_name'], $upload_path)) {
         echo json_encode([
             'success' => true, 
             'path' => $upload_path,
@@ -67,7 +67,7 @@ $is_authenticated = isset($_SESSION['authenticated']) && $_SESSION['authenticate
 // Handle content updates
 if ($is_authenticated && $_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
     $content_file = 'gallery-content.json';
-    
+
 if ($_POST['action'] === 'save_gallery') {
     $content = json_decode(file_get_contents($content_file), true) ?: [];
     
@@ -92,6 +92,7 @@ if ($_POST['action'] === 'save_gallery') {
             }
         }
     }
+
     
     // Update total count with actual remaining paintings
     $content['total_paintings'] = $painting_count;
@@ -103,10 +104,11 @@ if ($_POST['action'] === 'save_gallery') {
         $error_message = "❌ Error saving gallery content. Please try again.";
     }
 }
-}
 
-if ($_POST['action'] === 'save_text_page') {
-    // Save text page content
+
+    
+    if ($_POST['action'] === 'save_text_page') {
+        // Save text page content
         $content = json_decode(file_get_contents($content_file), true) ?: [];
         
         $content['text_page'] = [
@@ -124,7 +126,7 @@ if ($_POST['action'] === 'save_text_page') {
         file_put_contents($content_file, json_encode($content, JSON_PRETTY_PRINT));
         $success_message = 'Text page updated successfully!';
     }
-
+}
 
 // Load current content
 $current_content = [];
@@ -673,86 +675,6 @@ $current_section = $_GET['section'] ?? 'dashboard';
             font-size: 28px;
         }
     }
-
-/* MOBILE RESPONSIVE ENHANCEMENTS */
-@media (max-width: 768px) {
-    .dashboard-container {
-        padding: 10px !important;
-    }
-    
-    .form-grid {
-        grid-template-columns: 1fr !important;
-        gap: 15px !important;
-    }
-    
-    .form-card {
-        padding: 15px !important;
-    }
-    
-    .dashboard-btn {
-        width: 100% !important;
-        margin: 10px 0 !important;
-        padding: 18px 25px !important;
-        font-size: 1rem !important;
-    }
-    
-    .card-selector {
-        padding: 12px !important;
-        font-size: 16px !important; /* Prevents zoom on iOS */
-    }
-    
-    .card-checkbox {
-        width: 22px !important;
-        height: 22px !important;
-        margin-right: 10px !important;
-    }
-    
-    /* Better modal on mobile */
-    .modal-content {
-        width: 95% !important;
-        margin: 10px !important;
-        max-height: 90vh !important;
-    }
-    
-    .modal-body {
-        padding: 20px !important;
-    }
-    
-    .form-group input,
-    .form-group textarea {
-        font-size: 16px !important; /* Prevents zoom on iOS */
-        padding: 15px !important;
-    }
-}
-
-/* Touch-friendly checkboxes */
-.card-checkbox {
-    -webkit-appearance: none;
-    appearance: none;
-    background: white;
-    border: 2px solid #ddd;
-    border-radius: 4px;
-    cursor: pointer;
-    position: relative;
-}
-
-.card-checkbox:checked {
-    background: #e74c3c;
-    border-color: #e74c3c;
-}
-
-.card-checkbox:checked::after {
-    content: '✓';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    color: white;
-    font-size: 14px;
-    font-weight: bold;
-}
-
-
 </style>
 
 </head> 
@@ -841,6 +763,13 @@ $current_section = $_GET['section'] ?? 'dashboard';
         </div>
     </div>
     
+<?php 
+// DEBUG: Check what's in your JSON
+echo "<!-- DEBUG: ";
+var_dump($current_content);
+echo " -->";
+?>
+
 <?php elseif ($current_section === 'paintings'): ?>
     <!-- PAINTINGS EDITOR -->
     <div class="dashboard-container">
@@ -854,12 +783,10 @@ $current_section = $_GET['section'] ?? 'dashboard';
                 <input type="hidden" name="action" value="save_gallery">
                 
                 <div class="form-grid">
-                    <?php 
-                    $total_paintings = $current_content['total_paintings'] ?? 9;
-                    for ($i = 1; $i <= $total_paintings; $i++): 
+                    <?php for ($i = 1; $i <= 9; $i++): 
                         $painting = $current_content['paintings'][$i] ?? [];
                     ?>
-                        <div class="form-card">
+                        <div class="form-card" data-card-number="<?php echo $i; ?>">
                             <h4>Painting <?php echo $i; ?></h4>
                             
                             <div class="form-group">
@@ -917,9 +844,11 @@ $current_section = $_GET['section'] ?? 'dashboard';
                     <button type="submit" class="dashboard-btn save-btn">
                         <span class="btn-icon">💾</span>
                         <span class="btn-text">Save and Publish</span>
-                </button>
+                    </button>
+                </div>
+            </form>
         </div>
-</div>
+    </div>
 
 <?php elseif ($current_section === 'commissions'): ?>
     <!-- COMMISSIONS EDITOR -->
@@ -934,14 +863,23 @@ $current_section = $_GET['section'] ?? 'dashboard';
                 <input type="hidden" name="action" value="save_gallery">
                 
                 <div class="form-grid">
-                    <?php for ($i = 1; $i <= 9; $i++): ?>
-                        <div class="form-card">
+                    <?php for ($i = 1; $i <= 9; $i++): 
+                        $commission = $current_content['commissions'][$i] ?? [];
+                    ?>
+                        <div class="form-card" data-card-number="<?php echo $i; ?>">
                             <h4>Commission Type <?php echo $i; ?></h4>
                             
                             <div class="form-group">
                                 <label>Commission Title:</label>
                                 <input type="text" name="commission_<?php echo $i; ?>_title" 
                                        value="<?php echo htmlspecialchars($commission['title'] ?? ''); ?>">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>Type & Details:</label>
+                                <input type="text" name="commission_<?php echo $i; ?>_subtitle" 
+                                       value="<?php echo htmlspecialchars($commission['subtitle'] ?? ''); ?>"
+                                       placeholder="e.g., Mural, Portrait Commission, Corporate Art">
                             </div>
                             
                             <div class="form-group">
@@ -953,28 +891,28 @@ $current_section = $_GET['section'] ?? 'dashboard';
                                 <label>Image Path:</label>
                                 <input type="text" name="commission_<?php echo $i; ?>_image" 
                                        value="<?php echo htmlspecialchars($commission['image'] ?? ''); ?>"
-                                       placeholder="images/commission-name.jpg"
-                                       onchange="updatePreview(this, 'commission_<?php echo $i; ?>_preview')">
+                                       placeholder="images/commission-name.jpg">
                                 
                                 <?php if (!empty($commission['image'])): ?>
                                     <img src="<?php echo htmlspecialchars($commission['image']); ?>" 
-                                         alt="Preview" class="image-preview" 
-                                         id="commission_<?php echo $i; ?>_preview">
+                                         alt="Preview" class="image-preview">
                                 <?php endif; ?>
                             </div>
                         </div>
                     <?php endfor; ?>
                 </div>
 
+                 </div>
+
                 <div class="dashboard-actions">
                     <div class="card-management-section">
-                        <h3>Gallery Management</h3>
+                        <h3>Commission Gallery Management</h3>
                         <div class="card-buttons-group">
-                            <button type="button" id="add-card-btn" class="dashboard-btn add-btn">
+                            <button type="button" id="add-commission-btn" class="dashboard-btn add-btn">
                                 <span class="btn-icon">+</span>
-                                <span class="btn-text">Add New Commission or Mural</span>
+                                <span class="btn-text">Add New Commission</span>
                             </button>
-                            <button type="button" id="remove-card-btn" class="dashboard-btn remove-btn" disabled>
+                            <button type="button" id="remove-commission-btn" class="dashboard-btn remove-btn" disabled>
                                 <span class="btn-icon">-</span>
                                 <span class="btn-text">Remove Selected</span>
                             </button>
@@ -983,12 +921,14 @@ $current_section = $_GET['section'] ?? 'dashboard';
                 </div>
 
                 <div class="save-section">
-        <button type="submit" class="dashboard-btn save-btn">
-            <span class="btn-icon">💾</span>
-            <span class="btn-text">Save and Publish</span>
-        </button>
+                    <button type="submit" class="dashboard-btn save-btn">
+                        <span class="btn-icon">💾</span>
+                        <span class="btn-text">Save and Publish</span>
+                    </button>
+                </div>
+            </form>
+        </div>
     </div>
-</div>
  
 <?php elseif ($current_section === 'small_works'): ?>
     <!-- SMALL WORKS EDITOR -->
@@ -1566,9 +1506,6 @@ const modalCSS = `
         width: 100%;
     }
 }
-
-
-
 </style>`;
 
 // Inject modal CSS and HTML when page loads
@@ -2133,44 +2070,6 @@ function setupDragAndDrop() {
         uploadProgress.style.display = 'none';
     });
 }
-
-// Add this to your existing dashboard JavaScript
-document.addEventListener('DOMContentLoaded', function() {
-    // Enhanced mobile touch support for selection checkboxes
-    const checkboxes = document.querySelectorAll('.card-checkbox');
-    
-    checkboxes.forEach(checkbox => {
-        // Add touch event listeners for mobile
-        checkbox.addEventListener('touchstart', function(e) {
-            e.stopPropagation();
-        });
-        
-        checkbox.addEventListener('touchend', function(e) {
-            e.preventDefault();
-            e.stopPropagation();
-            
-            // Toggle checkbox manually for better mobile control
-            this.checked = !this.checked;
-            
-            // Trigger change event
-            const changeEvent = new Event('change', { bubbles: true });
-            this.dispatchEvent(changeEvent);
-        });
-    });
-    
-    // Enhanced mobile support for modal buttons
-    const modalButtons = document.querySelectorAll('.dashboard-btn');
-    modalButtons.forEach(btn => {
-        btn.addEventListener('touchstart', function() {
-            this.style.transform = 'scale(0.98)';
-        });
-        
-        btn.addEventListener('touchend', function() {
-            this.style.transform = '';
-        });
-    });
-});
-
 
 // Add enhanced drag & drop CSS
 const dragDropCSS = `
