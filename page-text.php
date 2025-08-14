@@ -4,6 +4,8 @@
  */
 get_header(); ?>
 
+<?php if (wp_is_mobile() === false) : ?>
+<!-- Desktop Only Elements -->
 <div class="site-title">
     <a href="<?php echo esc_url( home_url( '/' ) ); ?>" style="color: inherit; text-decoration: none;">
         Dragica<br>Carlin
@@ -25,6 +27,7 @@ get_header(); ?>
     ) );
     ?>
 </div>
+<?php endif; ?>
 
 <div id="primary" class="content-area">
     <main id="main" class="site-main">
@@ -46,7 +49,7 @@ get_header(); ?>
                     <!-- Card 1: Top Left - Text Content -->
                     <div class="text-card text-content-card">
                         <div class="text-card-inner">
-                            <h3>My Artistic Journey</h3>
+                            <h3>Dragica Carlin - Swirls of Contant Motion</h3>
                             <div class="text-content">
                                 <p>Art has always been my language for expressing what words cannot capture. From the earliest days of experimenting with color and form, I've been drawn to the way paint moves across canvas, how textures tell stories, and how abstract forms can evoke profound emotions.</p>
                                 

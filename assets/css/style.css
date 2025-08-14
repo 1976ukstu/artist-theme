@@ -3767,3 +3767,8 @@ a[title="Artist Dashboard"] {
     text-decoration: none !important;
     font-size: 1.3rem !important;
 }
+
+/* Hide red cog dashboard link */
+a[title="Artist Dashboard"] {
+    display: none !important;
+}

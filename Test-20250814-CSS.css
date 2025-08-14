@@ -1,0 +1,1511 @@
+
+/* ==============================================
+   ENHANCED FRONT PAGE RESPONSIVE TYPOGRAPHY
+   ============================================== */
+
+/* Enhanced Front Page Title Responsive Scaling */
+.site-title {
+    font-family: 'Helvetica', 'Helvetica Neue', Arial, sans-serif;
+    font-size: clamp(2.5rem, 8vw, 5rem); /* Smooth scaling from 40px to 80px */
+    font-weight: 300;
+    line-height: 1.1;
+    text-align: left;
+    margin: 0;
+    padding: 20px;
+    letter-spacing: -0.02em;
+    color: #2c3e50;
+    transition: font-size 0.3s ease;
+    position: absolute;
+    top: 1%;
+    left: 1%;
+    cursor: pointer;
+}
+
+.site-title:hover {
+    color: #ffffff;
+}
+
+/* Specific Breakpoints for Fine Control */
+@media screen and (max-width: 480px) {
+    .site-title {
+        font-size: 2.5rem !important; /* 40px on mobile */
+        padding: 15px;
+        line-height: 1.2;
+    }
+}
+
+@media screen and (min-width: 481px) and (max-width: 768px) {
+    .site-title {
+        font-size: 3.5rem !important; /* 56px on tablet */
+        padding: 18px;
+    }
+}
+
+@media screen and (min-width: 769px) and (max-width: 1024px) {
+    .site-title {
+        font-size: 4rem !important; /* 64px on small desktop */
+        padding: 20px;
+    }
+}
+
+@media screen and (min-width: 1025px) {
+    .site-title {
+        font-size: 5rem !important; /* 80px on large desktop */
+        padding: 25px;
+    }
+}
+
+/* Enhanced Menu Responsive Scaling */
+.home-permanent-menu .home-menu {
+    font-size: clamp(1rem, 2.5vw, 1.25rem);
+}
+
+.home-permanent-menu .home-menu li a {
+    font-family: 'Helvetica', 'Helvetica Neue', Arial, sans-serif;
+    font-weight: 300;
+    letter-spacing: 0.05em;
+    transition: all 0.3s ease;
+    padding: clamp(8px, 1.5vw, 12px) clamp(12px, 2vw, 16px);
+}
+
+@media screen and (max-width: 480px) {
+    .home-permanent-menu .home-menu li a {
+        font-size: 0.9rem !important;
+        padding: 8px 12px;
+    }
+}
+
+@media screen and (min-width: 481px) and (max-width: 768px) {
+    .home-permanent-menu .home-menu li a {
+        font-size: 1rem !important;
+        padding: 10px 14px;
+    }
+}
+
+@media screen and (min-width: 769px) {
+    .home-permanent-menu .home-menu li a {
+        font-size: 1.125rem !important;
+        padding: 12px 16px;
+    }
+}
+
+/* Enhanced Body Typography for Consistency */
+body {
+    font-family: 'Helvetica', 'Helvetica Neue', Arial, sans-serif !important;
+    font-weight: 300;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+
+
+/* Balance the side navigation to complement bold titles */
+.home-menu a,
+.side-menu a {
+    font-weight: 600 !important; /* Increased from bold to 600 for better balance */
+    font-size: clamp(1.1rem, 2.8vw, 1.4rem) !important; /* Slightly larger scaling */
+}
+
+/* ==============================================
+   UNIVERSAL CONTENT POSITIONING FIX
+   ============================================== */
+
+/* Apply consistent 210px spacing to ALL page content */
+.site-main,
+#main,
+#primary .site-main,
+.content-area .site-main,
+.contact-content,
+.text-page-content,
+.this-week-content,
+.paintings-content,
+.commissions-content,
+.small-works-content {
+    padding-top: 0px !important;
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+    padding-bottom: 40px !important;
+    max-width: 1200px !important;
+    margin: 0 auto !important;
+}
+
+/* Special override for video background contact page */
+.video-bg-content {
+    padding-top: 210px !important;
+    min-height: calc(100vh - 210px) !important;
+}
+
+/* Responsive adjustments for all pages */
+@media (max-width: 768px) {
+    .site-main,
+    #main,
+    #primary .site-main,
+    .content-area .site-main,
+    .contact-content,
+    .text-page-content,
+    .this-week-content,
+    .paintings-content,
+    .commissions-content,
+    .small-works-content {
+        padding-top: 0px !important;
+        padding-left: 15px !important;
+        padding-right: 15px !important;
+    }
+    
+    .video-bg-content {
+        padding-top: 180px !important;
+    }
+}
+
+
+/* ==============================================
+   SUPER-SPECIFIC CONTENT POSITIONING FIX
+   ============================================== */
+
+/* Target specific page template classes with maximum specificity */
+.page-template-page-paintings .site-main,
+.page-template-page-paintings .paintings-content,
+.page-template-page-commissions-and-murals .site-main,
+.page-template-page-commissions-and-murals .commissions-content,
+.page-template-page-small-works .site-main,
+.page-template-page-small-works .small-works-content,
+.page-template-page-text .site-main,
+.page-template-page-text .text-page-content,
+.page-template-page-this-week .site-main,
+.page-template-page-this-week .this-week-content {
+    padding-top: 0px !important;
+    margin-top: 0 !important;
+}
+
+/* Override ANY existing padding-top rules */
+.paintings-content,
+.commissions-content, 
+.small-works-content,
+.text-page-content,
+.this-week-content {
+    padding-top: 0px !important;
+    margin-top: 0 !important;
+}
+
+/* Nuclear option - force all main content containers */
+.site-main {
+    padding-top: 210px !important;
+}
+
+/* Remove any conflicting spacing from earlier in the CSS */
+.page-template-page-commissions-and-murals .site-main {
+    padding: 210px 20px 40px 20px !important;
+}
+
+.text-page-content {
+    padding: 210px 20px 40px 20px !important;
+}
+
+.this-week-content {
+    padding: 210px 20px 60px 20px !important;
+}
+
+/* Responsive override */
+@media (max-width: 768px) {
+    .page-template-page-paintings .site-main,
+    .page-template-page-commissions-and-murals .site-main,
+    .page-template-page-small-works .site-main,
+    .page-template-page-text .site-main,
+    .page-template-page-this-week .site-main,
+    .paintings-content,
+    .commissions-content,
+    .small-works-content,
+    .text-page-content,
+    .this-week-content {
+        padding-top: 0px !important;
+    }
+}
+/* Git workflow test */
+
+/* ==============================================
+   REFINED TYPOGRAPHY HIERARCHY - ELEGANT BALANCE
+   ============================================== */
+
+/* Enhanced Front Page Name - Keep Current Size */
+.site-title {
+    font-family: 'Helvetica', 'Helvetica Neue', Arial, sans-serif !important;
+    font-size: clamp(2.5rem, 8vw, 5rem) !important; /* Current scaling: 40px to 80px */
+    font-weight: 300 !important;
+    line-height: 1.1 !important;
+    text-align: left !important;
+    margin: 0 !important;
+    padding: 20px !important;
+    letter-spacing: -0.02em !important;
+    color: #2c3e50 !important;
+    transition: color 0.3s ease !important;
+    position: absolute !important;
+    top: 1% !important;
+    left: 1% !important;
+    cursor: pointer !important;
+}
+
+/* Side Menu Links - Elegant Balance */
+.home-menu a,
+.side-menu a {
+    font-family: 'Helvetica', 'Helvetica Neue', Arial, sans-serif !important;
+    font-size: clamp(0.9rem, 2.2vw, 1.2rem) !important; /* Elegant scaling */
+    font-weight: 400 !important; /* Slightly bolder than page titles for navigation importance */
+    letter-spacing: 0.05em !important;
+    transition: all 0.3s ease !important;
+    padding: clamp(8px, 1.5vw, 12px) clamp(12px, 2vw, 16px) !important;
+}
+
+
+/* ==============================================
+   PROFESSIONAL CONSISTENT CONTENT POSITIONING
+   ============================================== */
+
+/* CSS Custom Properties - Define once, use everywhere */
+:root {
+    --content-top-spacing: 210px;
+    --content-mobile-spacing: 180px;
+    --content-side-padding: 20px;
+    --content-bottom-padding: 40px;
+    --content-max-width: 1200px;
+}
+
+/* Universal content positioning - ALL pages */
+.site-main,
+#main,
+#primary .site-main,
+.content-area .site-main,
+.paintings-content,
+.commissions-content,
+.small-works-content,
+.contact-content,
+.text-page-content,
+.this-week-content,
+.video-bg-content {
+    padding-top: var(--content-top-spacing) !important;
+    padding-left: var(--content-side-padding) !important;
+    padding-right: var(--content-side-padding) !important;
+    padding-bottom: var(--content-bottom-padding) !important;
+    max-width: var(--content-max-width) !important;
+    margin: 0 auto !important;
+    box-sizing: border-box !important;
+}
+
+/* Override ANY conflicting rules with maximum specificity */
+.page-template-page-paintings .site-main,
+.page-template-page-commissions-and-murals .site-main,
+.page-template-page-small-works .site-main,
+.page-template-page-text .site-main,
+.page-template-page-this-week .site-main,
+.page-template-page-contact .site-main {
+    padding: var(--content-top-spacing) var(--content-side-padding) var(--content-bottom-padding) var(--content-side-padding) !important;
+    margin: 0 auto !important;
+    max-width: var(--content-max-width) !important;
+}
+
+/* Force consistency on specific content containers */
+.paintings-content,
+.commissions-content,
+.small-works-content,
+.text-page-content,
+.this-week-content {
+    padding: var(--content-top-spacing) var(--content-side-padding) var(--content-bottom-padding) var(--content-side-padding) !important;
+    margin: 0 auto !important;
+    max-width: var(--content-max-width) !important;
+}
+
+
+/* Responsive adjustments using custom properties */
+@media (max-width: 768px) {
+    :root {
+        --content-top-spacing: 180px;
+        --content-side-padding: 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    :root {
+        --content-top-spacing: 170px;
+        --content-side-padding: 15px;
+    }
+}
+
+/* ==============================================
+   NUCLEAR POSITIONING OVERRIDE - FINAL FIX
+   ============================================== */
+
+/* Force ALL pages to 210px with maximum specificity */
+body .site-main,
+body #main,
+body .content-area .site-main,
+body .paintings-content,
+body .commissions-content,
+body .small-works-content,
+body .contact-content,
+body .text-page-content,
+body .this-week-content,
+body .video-bg-content {
+    padding-top: 0px !important;
+    margin-top: 0 !important;
+}
+
+/* Mobile override */
+@media (max-width: 768px) {
+    body .site-main,
+    body #main,
+    body .content-area .site-main,
+    body .paintings-content,
+    body .commissions-content,
+    body .small-works-content,
+    body .contact-content,
+    body .text-page-content,
+    body .this-week-content,
+    body .video-bg-content {
+        padding-top: 0px !important;
+    }
+}
+
+/* ==============================================
+   ENHANCED FRONT PAGE MENU - DOUBLE SIZE
+   ============================================== */
+
+/* Make front page menu links double size with beautiful color */
+body.home .home-menu a,
+body.home .home-permanent-menu .home-menu a {
+    font-family: 'Helvetica', 'Helvetica Neue', Arial, sans-serif !important;
+    font-size: clamp(1.2rem, 4.4vw, 2.0rem) !important; /* DOUBLE SIZE: from 0.9-1.2rem to 1.8-2.4rem */
+    font-weight: 400 !important;
+    color: #2c3e50 !important; /* Beautiful dark blue-gray color to match site title */
+    letter-spacing: 0.05em !important;
+    transition: all 0.3s ease !important;
+    padding: clamp(16px, 3vw, 24px) clamp(24px, 4vw, 32px) !important; /* Double padding too */
+    line-height: 1.2 !important;
+    text-shadow: 0 1px 3px rgba(44, 62, 80, 0.1) !important; /* Subtle shadow for elegance */
+}
+
+/* Beautiful hover effect */
+body.home .home-menu a:hover {
+    color: #ffffff !important; /* Slightly lighter shade on hover */
+    transform: scale(1.2) !important; /* Tiny grow effect */
+    text-shadow: 0 2px 6px rgba(83, 102, 121, 0.331) !important;
+}
+
+/* Responsive scaling for mobile */
+@media (max-width: 768px) {
+    body.home .home-menu a {
+        font-size: clamp(1.4rem, 3.5vw, 1.8rem) !important; /* Smaller but still prominent on mobile */
+        padding: clamp(12px, 2.5vw, 18px) clamp(18px, 3vw, 24px) !important;
+    }
+}
+
+@media (max-width: 480px) {
+    body.home .home-menu a {
+        font-size: clamp(1.2rem, 3vw, 1.5rem) !important; /* Mobile-friendly sizing */
+        padding: clamp(10px, 2vw, 14px) clamp(16px, 2.5vw, 20px) !important;
+    }
+}
+
+
+/* ==============================================
+   DASHBOARD CARD MANAGEMENT STYLES
+   ============================================== */
+
+/* Enhanced Dashboard Actions */
+.dashboard-actions {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 30px;
+    margin: 40px 0;
+    padding: 30px;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 15px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+.card-management-section h3,
+.save-section h3 {
+    font-size: 1.4rem;
+    color: #2c3e50;
+    margin-bottom: 20px;
+    font-weight: 500;
+}
+
+.card-buttons-group {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+/* Beautiful Dashboard Buttons */
+.dashboard-btn {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 15px 25px;
+    border: none;
+    border-radius: 12px;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: 'Helvetica', 'Helvetica Neue', Arial, sans-serif;
+    min-width: 160px;
+    justify-content: center;
+}
+
+.dashboard-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none !important;
+}
+
+/* Add Card Button */
+.add-btn {
+    background: linear-gradient(135deg, #27ae60 0%, #2ecc71 100%);
+    color: white;
+    box-shadow: 0 4px 15px rgba(39, 174, 96, 0.3);
+}
+
+.add-btn:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(39, 174, 96, 0.4);
+}
+
+/* Remove Card Button */
+.remove-btn {
+    background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+    color: white;
+    box-shadow: 0 4px 15px rgba(231, 76, 60, 0.3);
+}
+
+.remove-btn:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(231, 76, 60, 0.4);
+}
+
+/* Enhanced Save and Publish Button */
+.save-btn {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+    color: white !important;
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3) !important;
+    width: 100% !important;
+    font-size: 1.1rem !important;
+    padding: 18px 30px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 10px !important;
+    border: none !important;
+    border-radius: 12px !important;
+    cursor: pointer !important;
+    transition: all 0.3s ease !important;
+    font-family: 'Helvetica', 'Helvetica Neue', Arial, sans-serif !important;
+}
+
+.save-btn:hover {
+    transform: translateY(-2px) !important;
+    box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4) !important;
+}
+
+/* Button Icons */
+.btn-icon {
+    font-size: 1.2rem;
+    line-height: 1;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .dashboard-actions {
+        grid-template-columns: 1fr;
+        gap: 20px;
+        padding: 20px;
+    }
+    
+    .card-buttons-group {
+        flex-direction: column;
+    }
+    
+    .dashboard-btn {
+        width: 100%;
+        min-width: auto;
+    }
+}
+
+/* ==============================================
+   DASHBOARD BUTTONS - NUCLEAR OVERRIDE
+   ============================================== */
+
+/* Force dashboard button styles with maximum specificity */
+body .dashboard-actions {
+    display: grid !important;
+    grid-template-columns: 2fr 1fr !important;
+    gap: 30px !important;
+    margin: 40px 0 !important;
+    padding: 30px !important;
+    background: rgba(255, 255, 255, 0.95) !important;
+    border-radius: 15px !important;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1) !important;
+}
+
+body .dashboard-btn,
+body button.dashboard-btn,
+body input.dashboard-btn {
+    display: flex !important;
+    align-items: center !important;
+    gap: 10px !important;
+    padding: 15px 25px !important;
+    border: none !important;
+    border-radius: 12px !important;
+    font-size: 1rem !important;
+    font-weight: 500 !important;
+    cursor: pointer !important;
+    transition: all 0.3s ease !important;
+    font-family: 'Helvetica', 'Helvetica Neue', Arial, sans-serif !important;
+    min-width: 160px !important;
+    justify-content: center !important;
+    text-decoration: none !important;
+}
+
+body .add-btn {
+    background: linear-gradient(135deg, #27ae60 0%, #2ecc71 100%) !important;
+    color: white !important;
+    box-shadow: 0 4px 15px rgba(39, 174, 96, 0.3) !important;
+}
+
+body .add-btn:hover:not(:disabled) {
+    transform: translateY(-2px) !important;
+    box-shadow: 0 8px 25px rgba(39, 174, 96, 0.4) !important;
+}
+
+body .remove-btn {
+    background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%) !important;
+    color: white !important;
+    box-shadow: 0 4px 15px rgba(231, 76, 60, 0.3) !important;
+}
+
+body .remove-btn:hover:not(:disabled) {
+    transform: translateY(-2px) !important;
+    box-shadow: 0 8px 25px rgba(231, 76, 60, 0.4) !important;
+}
+
+body .save-btn {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+    color: white !important;
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3) !important;
+    width: 100% !important;
+    font-size: 1.1rem !important;
+    padding: 18px 30px !important;
+}
+
+body .save-btn:hover {
+    transform: translateY(-2px) !important;
+    box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4) !important;
+}
+
+/* ==============================================
+   FINAL DASHBOARD BUTTON OVERRIDE - GUARANTEED STYLING
+   ============================================== */
+
+/* Maximum specificity override for dashboard buttons */
+body .dashboard-container .dashboard-actions .dashboard-btn,
+body .content-editor .dashboard-actions .dashboard-btn,
+form .dashboard-actions .dashboard-btn {
+    background: #ccc !important; /* This will be overridden by specific button styles below */
+    color: white !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 10px !important;
+    padding: 15px 25px !important;
+    border: none !important;
+    border-radius: 12px !important;
+    font-size: 1rem !important;
+    font-weight: 500 !important;
+    cursor: pointer !important;
+    transition: all 0.3s ease !important;
+    font-family: 'Helvetica', 'Helvetica Neue', Arial, sans-serif !important;
+    min-width: 160px !important;
+    justify-content: center !important;
+    text-decoration: none !important;
+}
+
+/* Green Add Button */
+body .dashboard-container .dashboard-actions .add-btn,
+body .content-editor .dashboard-actions .add-btn,
+form .dashboard-actions .add-btn {
+    background: linear-gradient(135deg, #27ae60 0%, #2ecc71 100%) !important;
+    color: white !important;
+    box-shadow: 0 4px 15px rgba(39, 174, 96, 0.3) !important;
+}
+
+body .dashboard-container .dashboard-actions .add-btn:hover,
+body .content-editor .dashboard-actions .add-btn:hover,
+form .dashboard-actions .add-btn:hover {
+    transform: translateY(-2px) !important;
+    box-shadow: 0 8px 25px rgba(39, 174, 96, 0.4) !important;
+}
+
+/* Red Remove Button */
+body .dashboard-container .dashboard-actions .remove-btn,
+body .content-editor .dashboard-actions .remove-btn,
+form .dashboard-actions .remove-btn {
+    background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%) !important;
+    color: white !important;
+    box-shadow: 0 4px 15px rgba(231, 76, 60, 0.3) !important;
+}
+
+body .dashboard-container .dashboard-actions .remove-btn:hover,
+body .content-editor .dashboard-actions .remove-btn:hover,
+form .dashboard-actions .remove-btn:hover {
+    transform: translateY(-2px) !important;
+    box-shadow: 0 8px 25px rgba(231, 76, 60, 0.4) !important;
+}
+
+/* Purple Save Button */
+body .dashboard-container .dashboard-actions .save-btn,
+body .content-editor .dashboard-actions .save-btn,
+form .dashboard-actions .save-btn {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+    color: white !important;
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3) !important;
+    width: 100% !important;
+    font-size: 1.1rem !important;
+    padding: 18px 30px !important;
+}
+
+body .dashboard-container .dashboard-actions .save-btn:hover,
+body .content-editor .dashboard-actions .save-btn:hover,
+form .dashboard-actions .save-btn:hover {
+    transform: translateY(-2px) !important;
+    box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4) !important;
+}
+
+/* Enhanced Dashboard Actions Container */
+body .dashboard-container .dashboard-actions,
+body .content-editor .dashboard-actions,
+form .dashboard-actions {
+    display: grid !important;
+    grid-template-columns: 2fr 1fr !important;
+    gap: 30px !important;
+    margin: 40px 0 !important;
+    padding: 30px !important;
+    background: rgba(255, 255, 255, 0.95) !important;
+    border-radius: 15px !important;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* ==============================================
+   ULTIMATE NUCLEAR DASHBOARD BUTTON OVERRIDE
+   ============================================== */
+
+/* Absolutely force these styles with !important on everything */
+html body .dashboard-actions .dashboard-btn,
+html body .dashboard-actions button,
+html body form .dashboard-actions .dashboard-btn,
+html body form .dashboard-actions button,
+html body .content-editor .dashboard-actions .dashboard-btn,
+html body .content-editor .dashboard-actions button {
+    background: #999 !important;
+    color: white !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 10px !important;
+    padding: 15px 25px !important;
+    border: none !important;
+    border-radius: 12px !important;
+    font-size: 1rem !important;
+    font-weight: 500 !important;
+    cursor: pointer !important;
+    transition: all 0.3s ease !important;
+    font-family: Arial, sans-serif !important;
+    min-width: 160px !important;
+    justify-content: center !important;
+    text-decoration: none !important;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2) !important;
+    margin: 0 !important;
+    line-height: 1 !important;
+}
+
+/* FORCE GREEN ADD BUTTONS */
+html body .dashboard-actions .add-btn,
+html body form .dashboard-actions .add-btn,
+html body .content-editor .dashboard-actions .add-btn {
+    background: linear-gradient(135deg, #27ae60 0%, #2ecc71 100%) !important;
+    color: white !important;
+    box-shadow: 0 4px 15px rgba(39, 174, 96, 0.3) !important;
+}
+
+html body .dashboard-actions .add-btn:hover,
+html body form .dashboard-actions .add-btn:hover,
+html body .content-editor .dashboard-actions .add-btn:hover {
+    transform: translateY(-2px) !important;
+    box-shadow: 0 8px 25px rgba(39, 174, 96, 0.4) !important;
+}
+
+/* FORCE RED REMOVE BUTTONS */
+html body .dashboard-actions .remove-btn,
+html body form .dashboard-actions .remove-btn,
+html body .content-editor .dashboard-actions .remove-btn {
+    background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%) !important;
+    color: white !important;
+    box-shadow: 0 4px 15px rgba(231, 76, 60, 0.3) !important;
+}
+
+html body .dashboard-actions .remove-btn:hover,
+html body form .dashboard-actions .remove-btn:hover,
+html body .content-editor .dashboard-actions .remove-btn:hover {
+    transform: translateY(-2px) !important;
+    box-shadow: 0 8px 25px rgba(231, 76, 60, 0.4) !important;
+}
+
+/* FORCE PURPLE SAVE BUTTONS */
+html body .dashboard-actions .save-btn,
+html body form .dashboard-actions .save-btn,
+html body .content-editor .dashboard-actions .save-btn {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+    color: white !important;
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3) !important;
+    width: 100% !important;
+    font-size: 1.1rem !important;
+    padding: 18px 30px !important;
+}
+
+html body .dashboard-actions .save-btn:hover,
+html body form .dashboard-actions .save-btn:hover,
+html body .content-editor .dashboard-actions .save-btn:hover {
+    transform: translateY(-2px) !important;
+    box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4) !important;
+}
+
+/* FORCE DASHBOARD ACTIONS CONTAINER */
+html body .dashboard-actions,
+html body form .dashboard-actions,
+html body .content-editor .dashboard-actions {
+    display: grid !important;
+    grid-template-columns: 2fr 1fr !important;
+    gap: 30px !important;
+    margin: 40px 0 !important;
+    padding: 30px !important;
+    background: rgba(255, 255, 255, 0.95) !important;
+    border-radius: 15px !important;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* MOBILE RESPONSIVE OVERRIDE */
+@media (max-width: 768px) {
+    html body .dashboard-actions,
+    html body form .dashboard-actions,
+    html body .content-editor .dashboard-actions {
+        grid-template-columns: 1fr !important;
+        gap: 20px !important;
+        padding: 20px !important;
+    }
+    
+    html body .dashboard-actions .dashboard-btn,
+    html body form .dashboard-actions .dashboard-btn,
+    html body .content-editor .dashboard-actions .dashboard-btn {
+        width: 100% !important;
+        min-width: auto !important;
+    }
+}
+
+/* ===========================================
+   MOBILE NAVIGATION SCROLLING FIX - CROSS-BROWSER
+   ========================================== */
+
+@media screen and (max-height: 600px) and (orientation: landscape) {
+    .main-navigation .menu {
+        max-height: 70vh !important;
+        overflow-y: auto !important;
+        overflow-x: hidden !important;
+        -webkit-overflow-scrolling: touch !important; /* iOS Safari only */
+        -ms-overflow-style: -ms-autohiding-scrollbar !important;
+        scrollbar-width: thin !important; /* Firefox only */
+        border-radius: 8px !important;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.1) !important;
+    }
+    
+    .main-navigation ul {
+        max-height: none !important;
+        padding-bottom: 20px !important;
+    }
+    
+    .main-navigation li {
+        margin: 5px 0 !important;
+    }
+    
+    .main-navigation a {
+        padding: 12px 20px !important;
+        font-size: 16px !important;
+        line-height: 1.4 !important;
+    }
+}
+
+/* Enhanced mobile menu for all small screens - Cross-browser */
+@media screen and (max-width: 768px) {
+    .main-navigation .menu {
+        background: rgba(255, 255, 255, 0.98) !important;
+        -webkit-backdrop-filter: blur(10px) !important;
+        backdrop-filter: blur(10px) !important;
+        border: 1px solid rgba(0,0,0,0.1) !important;
+        box-shadow: 0 8px 25px rgba(0,0,0,0.15) !important;
+    }
+    
+    .main-navigation ul li a {
+        color: #333 !important;
+        font-weight: 500 !important;
+        transition: all 0.3s ease !important;
+    }
+    
+    .main-navigation ul li a:hover {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+        color: white !important;
+        transform: translateX(5px) !important;
+    }
+}
+
+/* Smooth scrolling for the entire website */
+html {
+    scroll-behavior: smooth !important;
+}
+
+/* Beautiful custom scrollbar for mobile menu - Cross-browser */
+.main-navigation .menu::-webkit-scrollbar {
+    width: 4px;
+}
+
+.main-navigation .menu::-webkit-scrollbar-track {
+    background: rgba(0,0,0,0.1);
+    border-radius: 2px;
+}
+
+.main-navigation .menu::-webkit-scrollbar-thumb {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 2px;
+}
+
+.main-navigation .menu::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+}
+
+/* Firefox scrollbar styling */
+.main-navigation .menu {
+    scrollbar-width: thin;
+    scrollbar-color: #667eea rgba(0,0,0,0.1); /* Firefox only */
+}
+
+/* FORCE MOBILE NAVIGATION SCROLLING - CRITICAL */
+@media screen and (max-height: 600px) and (orientation: landscape) {
+    .main-navigation .menu {
+        max-height: 70vh !important;
+        overflow-y: auto !important;
+        overflow-x: hidden !important;
+        -webkit-overflow-scrolling: touch !important;
+        border-radius: 8px !important;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.1) !important;
+    }
+    
+    .main-navigation ul {
+        max-height: none !important;
+        padding-bottom: 20px !important;
+    }
+}
+
+/* FORCE GEAR ICON VISIBILITY */
+a[title="Artist Dashboard"] {
+    display: block !important;
+    position: fixed !important;
+    bottom: 20px !important;
+    right: 20px !important;
+    z-index: 99999 !important;
+}
+
+/* CRITICAL: MOBILE SCROLL FIX - FORCE LOAD */
+@media screen and (max-height: 600px) and (orientation: landscape) {
+    .main-navigation .menu,
+    .main-navigation ul,
+    #primary-menu {
+        max-height: 70vh !important;
+        overflow-y: auto !important;
+        overflow-x: hidden !important;
+        -webkit-overflow-scrolling: touch !important;
+        scrollbar-width: thin !important;
+    }
+}
+
+/* GEAR ICON FORCE VISIBILITY */
+a[title="Artist Dashboard"] {
+    position: fixed !important;
+    bottom: 20px !important;
+    right: 20px !important;
+    z-index: 999999 !important;
+    display: block !important;
+    background: #e74c3c !important;
+    color: white !important;
+    padding: 15px !important;
+    border-radius: 50% !important;
+    text-decoration: none !important;
+    font-size: 1.3rem !important;
+}
+
+/* ===========================================
+   ULTRA-COMPACT MOBILE MENU - SHORT SCREENS
+   ========================================== */
+
+/* Target very short screens (landscape mobile phones) */
+@media screen and (max-height: 480px) {
+    /* Compact menu item spacing */
+    .main-navigation li {
+        margin: 2px 0 !important; /* Reduced from 5px to 2px */
+    }
+    
+    .main-navigation a {
+        padding: 8px 15px !important; /* Reduced from 12px 20px to 8px 15px */
+        font-size: 14px !important; /* Smaller font for more items */
+        line-height: 1.2 !important; /* Tighter line height */
+    }
+    
+    /* Make menu container even more compact */
+    .main-navigation .menu {
+        max-height: 75vh !important; /* Slightly more height */
+        padding: 5px 0 !important; /* Minimal container padding */
+    }
+    
+    /* Compact navigation list */
+    .main-navigation ul {
+        padding: 0 !important; /* Remove all ul padding */
+        margin: 0 !important; /* Remove all ul margin */
+    }
+    
+    /* Reduce hamburger button size slightly */
+    .menu-toggle {
+        padding: 10px !important; /* Smaller hamburger button */
+        width: 40px !important;
+        height: 40px !important;
+    }
+}
+
+/* Even more compact for VERY short screens */
+@media screen and (max-height: 420px) {
+    .main-navigation a {
+        padding: 6px 12px !important; /* Ultra-compact padding */
+        font-size: 13px !important; /* Even smaller font */
+        line-height: 1.1 !important; /* Minimal line height */
+    }
+    
+    .main-navigation li {
+        margin: 1px 0 !important; /* Minimal item spacing */
+    }
+    
+    .main-navigation .menu {
+        max-height: 80vh !important; /* Maximum available height */
+        padding: 3px 0 !important; /* Minimal container padding */
+    }
+}
+
+/* Special handling for iPhone SE and similar tiny landscape screens */
+@media screen and (max-height: 380px) {
+    .main-navigation a {
+        padding: 5px 10px !important; /* Minimal padding */
+        font-size: 12px !important; /* Smaller font */
+        line-height: 1 !important; /* Tight line height */
+    }
+    
+    .main-navigation li {
+        margin: 0 !important; /* No margin between items */
+    }
+    
+    .main-navigation .menu {
+        max-height: 85vh !important; /* Use almost full screen height */
+        padding: 2px 0 !important; /* Minimal padding */
+    }
+    
+    /* Make hamburger even smaller */
+    .menu-toggle {
+        padding: 8px !important;
+        width: 35px !important;
+        height: 35px !important;
+        top: 10px !important;
+        right: 10px !important;
+    }
+}
+
+/* ===========================================
+   NUCLEAR MOBILE NAVIGATION FIX - PRESENTATION READY
+   ========================================== */
+
+/* FORCE mobile navigation to show */
+@media screen and (max-width: 768px) {
+    /* FORCE header elements visible */
+    header#masthead,
+    .site-header,
+    #masthead {
+        display: block !important;
+        position: fixed !important;
+        top: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+        z-index: 1000 !important;
+        background: transparent !important;
+        height: auto !important;
+        width: 100% !important;
+    }
+    
+    /* FORCE navigation visible */
+    .main-navigation,
+    #site-navigation,
+    nav.main-navigation {
+        display: block !important;
+        position: static !important;
+    }
+    
+    /* FORCE hamburger button */
+    .menu-toggle {
+        display: block !important;
+        position: fixed !important;
+        top: 20px !important;
+        right: 20px !important;
+        z-index: 1001 !important;
+        background: rgba(255, 255, 255, 0.9) !important;
+        border: none !important;
+        border-radius: 8px !important;
+        padding: 12px !important;
+        width: 45px !important;
+        height: 45px !important;
+        cursor: pointer !important;
+    }
+    
+    /* FORCE site title visible */
+    .site-branding,
+    .site-title {
+        display: block !important;
+        position: fixed !important;
+        top: 20px !important;
+        left: 20px !important;
+        z-index: 1001 !important;
+        font-size: 1.5rem !important;
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+    
+    .site-title a {
+        color: #2c3e50 !important;
+        text-decoration: none !important;
+        font-size: 1.5rem !important;
+    }
+    
+    /* Hide custom home menu on mobile */
+    .home-permanent-menu,
+    .side-panel {
+        display: none !important;
+    }
+}
+
+/* FORCE gear icon visibility on ALL devices */
+a[title="Artist Dashboard"] {
+    display: block !important;
+    position: fixed !important;
+    bottom: 20px !important;
+    right: 20px !important;
+    z-index: 999999 !important;
+    background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%) !important;
+    color: white !important;
+    padding: 15px !important;
+    border-radius: 50% !important;
+    text-decoration: none !important;
+    font-size: 1.3rem !important;
+    box-shadow: 0 6px 20px rgba(231, 76, 60, 0.4) !important;
+    transition: all 0.3s ease !important;
+    border: 3px solid white !important;
+}
+
+/* ===========================================
+   MOBILE MENU TOGGLE FIX - INSTANT SOLUTION
+   ========================================== */
+
+/* FORCE mobile menu to be hidden by default */
+@media screen and (max-width: 768px) {
+    .main-navigation .menu,
+    .main-navigation ul,
+    #primary-menu {
+        display: none !important;
+        position: fixed !important;
+        top: 70px !important;
+        right: 20px !important;
+        left: 20px !important;
+        background: rgba(255, 255, 255, 0.98) !important;
+        border-radius: 12px !important;
+        box-shadow: 0 8px 25px rgba(0,0,0,0.2) !important;
+        padding: 20px 0 !important;
+        z-index: 999 !important;
+        max-height: 70vh !important;
+        overflow-y: auto !important;
+        -webkit-overflow-scrolling: touch !important;
+    }
+    
+    /* Show menu when hamburger is clicked */
+    .main-navigation.toggled .menu,
+    .main-navigation.toggled ul,
+    .toggled #primary-menu {
+        display: block !important;
+    }
+    
+    /* Style menu items properly */
+    .main-navigation ul li {
+        display: block !important;
+        width: 100% !important;
+        border-bottom: 1px solid rgba(0,0,0,0.1) !important;
+    }
+    
+    .main-navigation ul li:last-child {
+        border-bottom: none !important;
+    }
+    
+    .main-navigation ul li a {
+        display: block !important;
+        padding: 15px 25px !important;
+        color: #333 !important;
+        font-weight: 500 !important;
+        text-decoration: none !important;
+        transition: all 0.3s ease !important;
+        border-radius: 8px !important;
+        margin: 2px 15px !important;
+    }
+    
+    .main-navigation ul li a:hover {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+        color: white !important;
+        transform: translateX(5px) !important;
+    }
+    
+    /* Animate hamburger button */
+    .menu-toggle[aria-expanded="true"] {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+        color: white !important;
+    }
+}
+
+/* Desktop - ensure menu is always visible */
+@media screen and (min-width: 769px) {
+    .main-navigation .menu,
+    .main-navigation ul,
+    #primary-menu {
+        display: none !important; /* Keep hidden on desktop as you have custom navigation */
+    }
+}
+
+.site-footer { display: none !important; }
+
+/* EMERGENCY HOMEPAGE STYLING FIX */
+@media screen and (max-width: 768px) {
+    /* FORCE mobile navigation visible */
+    header#masthead,
+    .site-header {
+        display: block !important;
+        position: fixed !important;
+        top: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+        z-index: 1000 !important;
+        background: transparent !important;
+    }
+    
+    .site-branding,
+    .site-title {
+        display: block !important;
+        position: fixed !important;
+        top: 20px !important;
+        left: 20px !important;
+        z-index: 1001 !important;
+        font-size: 1.5rem !important;
+    }
+    
+    .site-title a {
+        color: #2c3e50 !important;
+        text-decoration: none !important;
+    }
+    
+    .menu-toggle {
+        display: block !important;
+        position: fixed !important;
+        top: 20px !important;
+        right: 20px !important;
+        z-index: 1001 !important;
+        background: rgba(255, 255, 255, 0.9) !important;
+        border: none !important;
+        border-radius: 8px !important;
+        padding: 12px !important;
+        width: 45px !important;
+        height: 45px !important;
+    }
+    
+    /* Hide primary menu by default */
+    .main-navigation .menu,
+    .main-navigation ul,
+    #primary-menu {
+        display: none !important;
+    }
+    
+    /* Show when toggled */
+    .main-navigation.toggled .menu,
+    .main-navigation.toggled ul,
+    .toggled #primary-menu {
+        display: block !important;
+        position: fixed !important;
+        top: 70px !important;
+        left: 20px !important;
+        right: 20px !important;
+        background: rgba(255, 255, 255, 0.98) !important;
+        border-radius: 12px !important;
+        box-shadow: 0 8px 25px rgba(0,0,0,0.2) !important;
+        padding: 20px 0 !important;
+        z-index: 999 !important;
+    }
+}
+
+/* FORCE gear icon visibility */
+a[title="Artist Dashboard"] {
+    display: block !important;
+    position: fixed !important;
+    bottom: 20px !important;
+    right: 20px !important;
+    z-index: 999999 !important;
+}
+
+/* ===========================================
+   CLEAN MOBILE & DESKTOP NAVIGATION - FINAL FIX
+   ========================================== */
+
+/* DESKTOP - Hide WordPress navigation, show custom design */
+@media screen and (min-width: 769px) {
+    /* Hide WordPress navigation elements */
+    .main-navigation,
+    #site-navigation,
+    .menu-toggle,
+    nav.main-navigation {
+        display: none !important;
+    }
+    
+    /* Show beautiful custom site title on homepage */
+    body.home .site-title {
+        display: block !important;
+        position: absolute !important;
+        top: 1% !important;
+        left: 1% !important;
+        font-size: clamp(2.5rem, 8vw, 5rem) !important;
+        color: #2c3e50 !important;
+        z-index: 10 !important;
+        font-weight: 300 !important;
+        letter-spacing: -0.02em !important;
+        transition: color 0.3s ease !important;
+        cursor: pointer !important;
+        padding: 20px !important;
+    }
+    
+    body.home .site-title:hover {
+        color: #ffffff !important;
+    }
+    
+    /* Show custom side menu on homepage */
+    body.home .home-permanent-menu {
+        display: flex !important;
+        position: fixed !important;
+        top: 0 !important;
+        right: 0 !important;
+        width: 600px !important;
+        height: 100vh !important;
+    }
+    
+    /* Show normal site title on other pages */
+    body:not(.home) .site-title {
+        display: block !important;
+        position: relative !important;
+        font-size: 2.5rem !important;
+        color: #2c3e50 !important;
+        font-weight: 300 !important;
+        padding: 30px 20px !important;
+        margin: 0 !important;
+        text-align: center !important;
+        background: rgba(255, 255, 255, 0.95) !important;
+        border-radius: 15px !important;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1) !important;
+        margin-bottom: 40px !important;
+    }
+    
+    body:not(.home) .site-title a {
+        color: #2c3e50 !important;
+        text-decoration: none !important;
+        transition: color 0.3s ease !important;
+    }
+    
+    body:not(.home) .site-title a:hover {
+        color: #667eea !important;
+    }
+}
+
+/* MOBILE - Show WordPress navigation, hide custom elements */
+@media screen and (max-width: 768px) {
+    /* Show WordPress header */
+    header#masthead,
+    .site-header,
+    #masthead {
+        display: block !important;
+        position: fixed !important;
+        top: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+        z-index: 1000 !important;
+        background: transparent !important;
+    }
+    
+    /* Show site title */
+    .site-branding,
+    .site-title {
+        display: block !important;
+        position: fixed !important;
+        top: 20px !important;
+        left: 20px !important;
+        z-index: 1001 !important;
+        background: rgba(255, 255, 255, 0.95) !important;
+        padding: 12px 18px !important;
+        border-radius: 10px !important;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1) !important;
+    }
+    
+    .site-title a {
+        color: #2c3e50 !important;
+        text-decoration: none !important;
+        font-size: 1.4rem !important;
+        font-weight: 500 !important;
+    }
+    
+    /* Show hamburger menu */
+    .menu-toggle {
+        display: block !important;
+        position: fixed !important;
+        top: 20px !important;
+        right: 20px !important;
+        z-index: 1001 !important;
+        background: rgba(255, 255, 255, 0.95) !important;
+        border: none !important;
+        border-radius: 10px !important;
+        padding: 15px !important;
+        width: 50px !important;
+        height: 50px !important;
+        cursor: pointer !important;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1) !important;
+        font-size: 18px !important;
+        color: #2c3e50 !important;
+    }
+    
+    /* Show navigation */
+    .main-navigation,
+    #site-navigation {
+        display: block !important;
+    }
+    
+    /* Hide menu by default */
+    .main-navigation .menu,
+    .main-navigation ul,
+    #primary-menu {
+        display: none !important;
+        position: fixed !important;
+        top: 80px !important;
+        left: 20px !important;
+        right: 20px !important;
+        background: rgba(255, 255, 255, 0.98) !important;
+        border-radius: 15px !important;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2) !important;
+        padding: 25px 0 !important;
+        z-index: 999 !important;
+        max-height: 70vh !important;
+        overflow-y: auto !important;
+        -webkit-overflow-scrolling: touch !important;
+    }
+    
+    /* Show menu when toggled */
+    .main-navigation.toggled .menu,
+    .main-navigation.toggled ul,
+    .toggled #primary-menu {
+        display: block !important;
+    }
+    
+    /* Style menu items */
+    .main-navigation ul li {
+        display: block !important;
+        margin: 0 !important;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.05) !important;
+    }
+    
+    .main-navigation ul li:last-child {
+        border-bottom: none !important;
+    }
+    
+    .main-navigation ul li a {
+        display: block !important;
+        padding: 18px 25px !important;
+        color: #2c3e50 !important;
+        font-weight: 500 !important;
+        text-decoration: none !important;
+        font-size: 1.1rem !important;
+        transition: all 0.3s ease !important;
+        border-radius: 8px !important;
+        margin: 3px 15px !important;
+    }
+    
+    .main-navigation ul li a:hover {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+        color: white !important;
+        transform: translateX(8px) !important;
+    }
+    
+    /* Hide custom homepage menu on mobile */
+    .home-permanent-menu,
+    .side-panel {
+        display: none !important;
+    }
+    
+    /* Hamburger animation */
+    .menu-toggle[aria-expanded="true"] {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+        color: white !important;
+    }
+}
+
+/* GEAR ICON - Always visible */
+a[title="Artist Dashboard"] {
+    display: block !important;
+    position: fixed !important;
+    bottom: 20px !important;
+    right: 20px !important;
+    z-index: 999999 !important;
+    background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%) !important;
+    color: white !important;
+    padding: 15px !important;
+    border-radius: 50% !important;
+    text-decoration: none !important;
+    font-size: 1.3rem !important;
+    box-shadow: 0 6px 20px rgba(231, 76, 60, 0.4) !important;
+    transition: all 0.3s ease !important;
+    border: 3px solid white !important;
+}
+
+a[title="Artist Dashboard"]:hover {
+    transform: scale(1.1) !important;
+    box-shadow: 0 8px 30px rgba(231, 76, 60, 0.6) !important;
+}
+
+/* Hide footer */
+.site-footer {
+    display: none !important;
+}
+
+/* Landscape phone scrolling fix */
+@media screen and (max-height: 600px) and (orientation: landscape) {
+    .main-navigation .menu,
+    .main-navigation ul,
+    #primary-menu {
+        max-height: 70vh !important;
+        overflow-y: auto !important;
+        -webkit-overflow-scrolling: touch !important;
+    }
+}
