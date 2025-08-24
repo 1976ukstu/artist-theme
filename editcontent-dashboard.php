@@ -1,8 +1,20 @@
+
 <?php
+
 /**
  * Revolutionary Artist Website Management Dashboard
  * Complete control over all website content
  */
+
+
+
+
+
+
+
+
+
+
 
 // Simple password protection
 session_start();
@@ -70,36 +82,66 @@ if ($is_authenticated && $_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['
 
 if ($_POST['action'] === 'save_gallery') {
     $content = json_decode(file_get_contents($content_file), true) ?: [];
-    
-    // Clear existing paintings to rebuild from form data
-    $content['paintings'] = [];
-    $painting_count = 0;
-    
-    // Only save paintings that exist in the form (non-removed ones)
-    foreach ($_POST as $key => $value) {
-        if (preg_match('/^painting_(\d+)_title$/', $key, $matches)) {
-            $i = intval($matches[1]);
-            
-            // Only save if title is not empty (card wasn't removed)
-            if (!empty(trim($_POST["painting_{$i}_title"]))) {
-                $painting_count++;
-                $content['paintings'][$painting_count] = [
-                    'title' => sanitize_text_field($_POST["painting_{$i}_title"]),
-                    'subtitle' => isset($_POST["painting_{$i}_subtitle"]) ? sanitize_text_field($_POST["painting_{$i}_subtitle"]) : '',
-                    'description' => isset($_POST["painting_{$i}_description"]) ? sanitize_textarea_field($_POST["painting_{$i}_description"]) : '',
-                    'image' => isset($_POST["painting_{$i}_image"]) ? sanitize_text_field($_POST["painting_{$i}_image"]) : ''
-                ];
+    // Determine which section is being edited
+    if (isset($_POST['section']) && $_POST['section'] === 'paintings') {
+        $content['paintings'] = [];
+        $painting_count = 0;
+        foreach ($_POST as $key => $value) {
+            if (preg_match('/^painting_(\d+)_title$/', $key, $matches)) {
+                $i = intval($matches[1]);
+                if (!empty(trim($_POST["painting_{$i}_title"]))) {
+                    $painting_count++;
+                    $content['paintings'][$painting_count] = [
+                        'title' => sanitize_text_field($_POST["painting_{$i}_title"]),
+                        'subtitle' => isset($_POST["painting_{$i}_subtitle"]) ? sanitize_text_field($_POST["painting_{$i}_subtitle"]) : '',
+                        'description' => isset($_POST["painting_{$i}_description"]) ? sanitize_textarea_field($_POST["painting_{$i}_description"]) : '',
+                        'image' => isset($_POST["painting_{$i}_image"]) ? sanitize_text_field($_POST["painting_{$i}_image"]) : ''
+                    ];
+                }
             }
         }
+        $content['total_paintings'] = $painting_count;
     }
-
-    
-    // Update total count with actual remaining paintings
-    $content['total_paintings'] = $painting_count;
-    
+    if (isset($_POST['section']) && $_POST['section'] === 'commissions') {
+        $content['commissions'] = [];
+        $commission_count = 0;
+        foreach ($_POST as $key => $value) {
+            if (preg_match('/^commission_(\d+)_title$/', $key, $matches)) {
+                $i = intval($matches[1]);
+                if (!empty(trim($_POST["commission_{$i}_title"]))) {
+                    $commission_count++;
+                    $content['commissions'][$commission_count] = [
+                        'title' => sanitize_text_field($_POST["commission_{$i}_title"]),
+                        'subtitle' => isset($_POST["commission_{$i}_subtitle"]) ? sanitize_text_field($_POST["commission_{$i}_subtitle"]) : '',
+                        'description' => isset($_POST["commission_{$i}_description"]) ? sanitize_textarea_field($_POST["commission_{$i}_description"]) : '',
+                        'image' => isset($_POST["commission_{$i}_image"]) ? sanitize_text_field($_POST["commission_{$i}_image"]) : ''
+                    ];
+                }
+            }
+        }
+        $content['total_commissions'] = $commission_count;
+    }
+    if (isset($_POST['section']) && $_POST['section'] === 'small_works') {
+        $content['small_works'] = [];
+        $small_work_count = 0;
+        foreach ($_POST as $key => $value) {
+            if (preg_match('/^small_work_(\d+)_title$/', $key, $matches)) {
+                $i = intval($matches[1]);
+                if (!empty(trim($_POST["small_work_{$i}_title"]))) {
+                    $small_work_count++;
+                    $content['small_works'][$small_work_count] = [
+                        'title' => sanitize_text_field($_POST["small_work_{$i}_title"]),
+                        'description' => isset($_POST["small_work_{$i}_description"]) ? sanitize_textarea_field($_POST["small_work_{$i}_description"]) : '',
+                        'image' => isset($_POST["small_work_{$i}_image"]) ? sanitize_text_field($_POST["small_work_{$i}_image"]) : ''
+                    ];
+                }
+            }
+        }
+        $content['total_small_works'] = $small_work_count;
+    }
     // Save to JSON file
     if (file_put_contents($content_file, json_encode($content, JSON_PRETTY_PRINT))) {
-        $success_message = "✨ Gallery updated successfully! Removed paintings are permanently deleted!";
+        $success_message = "✨ Gallery updated successfully! Removed items are permanently deleted!";
     } else {
         $error_message = "❌ Error saving gallery content. Please try again.";
     }
@@ -258,7 +300,8 @@ $current_section = $_GET['section'] ?? 'dashboard';
         
         body {
             font-family: 'Helvetica', 'Helvetica Neue', Arial, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: url('images/bg.jpg') no-repeat center center fixed;
+            background-size: cover;
             min-height: 100vh;
             color: #333;
         }
@@ -361,22 +404,25 @@ $current_section = $_GET['section'] ?? 'dashboard';
     }
     
     .dashboard-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-        gap: 30px;
-        margin-bottom: 40px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    margin-bottom: 40px;
     }
     
     .dashboard-card {
-        background: rgba(255, 255, 255, 0.95);
-        border-radius: 20px;
-        padding: 30px;
-        text-align: center;
-        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
-        transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
-        cursor: pointer;
-        border: 1px solid rgba(255, 255, 255, 0.3);
-        backdrop-filter: blur(10px);
+    background: rgba(255, 255, 255, 0.65);
+    border-radius: 24px;
+    padding: 32px;
+    text-align: center;
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.18);
+    transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+    cursor: pointer;
+    border: 1.5px solid rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(18px) saturate(180%);
+    -webkit-backdrop-filter: blur(18px) saturate(180%);
+    overflow: hidden;
+    /* Glassmorphism effect */
     }
     
     .dashboard-card:hover {
@@ -714,7 +760,7 @@ $current_section = $_GET['section'] ?? 'dashboard';
         
         <div class="dashboard-grid">
             <!-- Paintings Section -->
-            <div class="dashboard-card" onclick="window.location.href='?section=paintings'">
+            <div class="dashboard-card" onclick="window.open('?section=paintings', '_blank')">
                 <span class="icon">🎨</span>
                 <h3>Paintings Gallery</h3>
                 <p>Manage your painting collection - titles, descriptions, images, and medium details</p>
@@ -722,7 +768,7 @@ $current_section = $_GET['section'] ?? 'dashboard';
             </div>
             
             <!-- Commissions Section -->
-            <div class="dashboard-card" onclick="window.location.href='?section=commissions'">
+            <div class="dashboard-card" onclick="window.open('?section=commissions', '_blank')">
                 <span class="icon">🏛️</span>
                 <h3>Commissions</h3>
                 <p>Edit commission types, descriptions, and showcase images</p>
@@ -730,7 +776,7 @@ $current_section = $_GET['section'] ?? 'dashboard';
             </div>
             
             <!-- Small Works Section -->
-            <div class="dashboard-card" onclick="window.location.href='?section=small_works'">
+            <div class="dashboard-card" onclick="window.open('?section=small_works', '_blank')">
                 <span class="icon">🖼️</span>
                 <h3>Small Works</h3>
                 <p>Manage your collection of smaller pieces and studies</p>
@@ -738,7 +784,7 @@ $current_section = $_GET['section'] ?? 'dashboard';
             </div>
             
             <!-- Text Page Section -->
-            <div class="dashboard-card" onclick="window.location.href='?section=text_page'">
+            <div class="dashboard-card" onclick="window.open('?section=text_page', '_blank')">
                 <span class="icon">📝</span>
                 <h3>Text Page Content</h3>
                 <p>Edit all text content, artist statement, and narrative sections</p>
@@ -746,70 +792,71 @@ $current_section = $_GET['section'] ?? 'dashboard';
             </div>
             
             <!-- This Week Section -->
-            <div class="dashboard-card" onclick="window.location.href='?section=this_week'">
+            <div class="dashboard-card" onclick="window.open('?section=this_week', '_blank')">
                 <span class="icon">📅</span>
                 <h3>This Week Updates</h3>
                 <p>Manage weekly updates, news, and current projects</p>
                 <span class="item-count">Coming Soon</span>
             </div>
             
-            <!-- Contact Page Section -->
-            <div class="dashboard-card" onclick="window.location.href='?section=contact'">
-                <span class="icon">📧</span>
-                <h3>Contact Information</h3>
-                <p>Update contact details, studio information, and availability</p>
-                <span class="item-count">Coming Soon</span>
+            <!-- SMALL WORKS EDITOR -->
+            <div class="dashboard-container">
+                <div class="content-editor">
+                    <div class="section-header">
+                        <h2>🖼️ Small Works Editor</h2>
+                        <a href="?section=dashboard" class="back-btn">← Back to Dashboard</a>
+                    </div>
+                    <form method="post">
+                        <input type="hidden" name="action" value="save_gallery">
+                        <input type="hidden" name="section" value="small_works">
+                        <div class="form-grid">
+                            <?php for ($i = 1; $i <= 9; $i++): 
+                                $small_work = $current_content['small_works'][$i] ?? [];
+                            ?>
+                                <div class="form-card" data-card-number="<?php echo $i; ?>">
+                                    <h4>Small Work <?php echo $i; ?></h4>
+                                    <div class="form-group">
+                                        <label>Title:</label>
+                                        <input type="text" name="small_work_<?php echo $i; ?>_title" value="<?php echo htmlspecialchars($small_work['title'] ?? ''); ?>">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Description:</label>
+                                        <textarea name="small_work_<?php echo $i; ?>_description" rows="4"><?php echo htmlspecialchars($small_work['description'] ?? ''); ?></textarea>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Image Path:</label>
+                                        <input type="text" name="small_work_<?php echo $i; ?>_image" value="<?php echo htmlspecialchars($small_work['image'] ?? ''); ?>" placeholder="images/small-work-name.jpg" onchange="updatePreview(this, 'small_work_<?php echo $i; ?>_preview')">
+                                        <?php if (!empty($small_work['image'])): ?>
+                                            <img src="<?php echo htmlspecialchars($small_work['image']); ?>" alt="Preview" class="image-preview" id="small_work_<?php echo $i; ?>_preview">
+                                        <?php endif; ?>
+                                    </div>
+                                </div>
+                            <?php endfor; ?>
+                        </div>
+                        <div class="dashboard-actions">
+                            <div class="card-management-section">
+                                <h3>Gallery Management</h3>
+                                <div class="card-buttons-group">
+                                    <button type="button" id="add-smallwork-btn" class="dashboard-btn add-btn">
+                                        <span class="btn-icon">+</span>
+                                        <span class="btn-text">Add New Small Work</span>
+                                    </button>
+                                    <button type="button" id="remove-smallwork-btn" class="dashboard-btn remove-btn" disabled>
+                                        <span class="btn-icon">-</span>
+                                        <span class="btn-text">Remove Selected</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="save-section">
+                            <button type="submit" class="dashboard-btn save-btn">
+                                <span class="btn-icon">💾</span>
+                                <span class="btn-text">Save and Publish</span>
+                            </button>
+                        </div>
+                    </form>
+                </div>
             </div>
-        </div>
-    </div>
-    
-<?php 
-// DEBUG: Check what's in your JSON
-echo "<!-- DEBUG: ";
-var_dump($current_content);
-echo " -->";
-?>
-
-<?php elseif ($current_section === 'paintings'): ?>
-    <!-- PAINTINGS EDITOR -->
-    <div class="dashboard-container">
-        <div class="content-editor">
-            <div class="section-header">
-                <h2>🎨 Paintings Gallery Editor</h2>
-                <a href="?section=dashboard" class="back-btn">← Back to Dashboard</a>
-            </div>
-            
-            <form method="post">
-                <input type="hidden" name="action" value="save_gallery">
-                
-                <div class="form-grid">
-                    <?php for ($i = 1; $i <= 9; $i++): 
-                        $painting = $current_content['paintings'][$i] ?? [];
-                    ?>
-                        <div class="form-card" data-card-number="<?php echo $i; ?>">
-                            <h4>Painting <?php echo $i; ?></h4>
-                            
-                            <div class="form-group">
-                                <label>Title:</label>
-                                <input type="text" name="painting_<?php echo $i; ?>_title" 
-                                       value="<?php echo htmlspecialchars($painting['title'] ?? ''); ?>">
-                            </div>
-                            
-                            <div class="form-group">
-                                <label>Medium & Dimensions:</label>
-                                <input type="text" name="painting_<?php echo $i; ?>_subtitle" 
-                                       value="<?php echo htmlspecialchars($painting['subtitle'] ?? ''); ?>"
-                                       placeholder="e.g., Oil on Canvas, 150cm x 150cm">
-                            </div>
-                            
-                            <div class="form-group">
-                                <label>Description:</label>
-                                <textarea name="painting_<?php echo $i; ?>_description" rows="4"><?php echo htmlspecialchars($painting['description'] ?? ''); ?></textarea>
-                            </div>
-                            
-                            <div class="form-group">
-                                <label>Image Path:</label>
-                                <input type="text" name="painting_<?php echo $i; ?>_image" 
                                        value="<?php echo htmlspecialchars($painting['image'] ?? ''); ?>"
                                        placeholder="images/painting-name.jpg"
                                        onchange="updatePreview(this, 'painting_<?php echo $i; ?>_preview')">
@@ -858,55 +905,40 @@ echo " -->";
                 <h2>🏛️ Commissions and Murals Editor</h2>
                 <a href="?section=dashboard" class="back-btn">← Back to Dashboard</a>
             </div>
-            
             <form method="post">
                 <input type="hidden" name="action" value="save_gallery">
-                
+                <input type="hidden" name="section" value="commissions">
                 <div class="form-grid">
                     <?php for ($i = 1; $i <= 9; $i++): 
                         $commission = $current_content['commissions'][$i] ?? [];
                     ?>
                         <div class="form-card" data-card-number="<?php echo $i; ?>">
                             <h4>Commission Type <?php echo $i; ?></h4>
-                            
                             <div class="form-group">
-                                <label>Commission Title:</label>
-                                <input type="text" name="commission_<?php echo $i; ?>_title" 
-                                       value="<?php echo htmlspecialchars($commission['title'] ?? ''); ?>">
+                                <label>Title:</label>
+                                <input type="text" name="commission_<?php echo $i; ?>_title" value="<?php echo htmlspecialchars($commission['title'] ?? ''); ?>">
                             </div>
-                            
                             <div class="form-group">
                                 <label>Type & Details:</label>
-                                <input type="text" name="commission_<?php echo $i; ?>_subtitle" 
-                                       value="<?php echo htmlspecialchars($commission['subtitle'] ?? ''); ?>"
-                                       placeholder="e.g., Mural, Portrait Commission, Corporate Art">
+                                <input type="text" name="commission_<?php echo $i; ?>_subtitle" value="<?php echo htmlspecialchars($commission['subtitle'] ?? ''); ?>" placeholder="e.g., Mural, Portrait Commission, Corporate Art">
                             </div>
-                            
                             <div class="form-group">
                                 <label>Description:</label>
                                 <textarea name="commission_<?php echo $i; ?>_description" rows="4"><?php echo htmlspecialchars($commission['description'] ?? ''); ?></textarea>
                             </div>
-                            
                             <div class="form-group">
                                 <label>Image Path:</label>
-                                <input type="text" name="commission_<?php echo $i; ?>_image" 
-                                       value="<?php echo htmlspecialchars($commission['image'] ?? ''); ?>"
-                                       placeholder="images/commission-name.jpg">
-                                
+                                <input type="text" name="commission_<?php echo $i; ?>_image" value="<?php echo htmlspecialchars($commission['image'] ?? ''); ?>" placeholder="images/commission-name.jpg" onchange="updatePreview(this, 'commission_<?php echo $i; ?>_preview')">
                                 <?php if (!empty($commission['image'])): ?>
-                                    <img src="<?php echo htmlspecialchars($commission['image']); ?>" 
-                                         alt="Preview" class="image-preview">
+                                    <img src="<?php echo htmlspecialchars($commission['image']); ?>" alt="Preview" class="image-preview" id="commission_<?php echo $i; ?>_preview">
                                 <?php endif; ?>
                             </div>
                         </div>
                     <?php endfor; ?>
                 </div>
-
-                 </div>
-
                 <div class="dashboard-actions">
                     <div class="card-management-section">
-                        <h3>Commission Gallery Management</h3>
+                        <h3>Gallery Management</h3>
                         <div class="card-buttons-group">
                             <button type="button" id="add-commission-btn" class="dashboard-btn add-btn">
                                 <span class="btn-icon">+</span>
@@ -919,7 +951,6 @@ echo " -->";
                         </div>
                     </div>
                 </div>
-
                 <div class="save-section">
                     <button type="submit" class="dashboard-btn save-btn">
                         <span class="btn-icon">💾</span>
@@ -941,6 +972,7 @@ echo " -->";
             
             <form method="post">
                 <input type="hidden" name="action" value="save_gallery">
+                <input type="hidden" name="section" value="small_works">
                 
                 <div class="form-grid">
                     <?php for ($i = 1; $i <= 9; $i++): 
@@ -988,10 +1020,10 @@ echo " -->";
                             <button type="button" id="remove-card-btn" class="dashboard-btn remove-btn" disabled>
                                 <span class="btn-icon">-</span>
                                 <span class="btn-text">Remove Selected</span>
-                            </button>
+                                </button>
                         </div>
                     </div>
-                </div>
+                                </div>
 
                 <div class="save-section">
         <button type="submit" class="dashboard-btn save-btn">

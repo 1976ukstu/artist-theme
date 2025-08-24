@@ -3638,9 +3638,25 @@ html body .content-editor .dashboard-actions {
         max-height: 70vh !important;
         overflow-y: auto !important;
         overflow-x: hidden !important;
-        -webkit-overflow-scrolling: touch !important; /* iOS Safari only */
+        /* -webkit-overflow-scrolling: touch !important;  Removed: not supported by modern browsers */
         -ms-overflow-style: -ms-autohiding-scrollbar !important;
         scrollbar-width: thin !important; /* Firefox only */
+        /* WebKit fallback for thin scrollbar */
+        &::-webkit-scrollbar {
+            width: 4px;
+        }
+        &::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 2px;
+        }
+        /* Fallback for WebKit browsers */
+        &::-webkit-scrollbar {
+            width: 4px;
+        }
+        &::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 2px;
+        }
         border-radius: 8px !important;
         box-shadow: 0 4px 15px rgba(0,0,0,0.1) !important;
     }
@@ -3720,7 +3736,6 @@ html {
         max-height: 70vh !important;
         overflow-y: auto !important;
         overflow-x: hidden !important;
-        -webkit-overflow-scrolling: touch !important;
         border-radius: 8px !important;
         box-shadow: 0 4px 15px rgba(0,0,0,0.1) !important;
     }
@@ -3749,7 +3764,23 @@ a[title="Artist Dashboard"] {
         overflow-y: auto !important;
         overflow-x: hidden !important;
         -webkit-overflow-scrolling: touch !important;
-        scrollbar-width: thin !important;
+        scrollbar-width: thin !important; /* Firefox only */
+        /* WebKit fallback for thin scrollbar */
+        &::-webkit-scrollbar {
+            width: 4px;
+        }
+        &::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 2px;
+        }
+        /* WebKit fallback for thin scrollbar */
+        &::-webkit-scrollbar {
+            width: 4px;
+        }
+        &::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 2px;
+        }
     }
 }
 
