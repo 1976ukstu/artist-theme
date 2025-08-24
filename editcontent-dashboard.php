@@ -893,7 +893,7 @@ $current_section = $_GET['section'] ?? 'dashboard';
                         <span class="btn-text">Save and Publish</span>
                     </button>
                 </div>
-            </form>
+                                </form>
         </div>
     </div>
 
