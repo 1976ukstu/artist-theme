@@ -6,16 +6,6 @@
  * Complete control over all website content
  */
 
-
-
-
-
-
-
-
-
-
-
 // Simple password protection
 session_start();
 $correct_password = 'artist2025';
@@ -893,7 +883,7 @@ $current_section = $_GET['section'] ?? 'dashboard';
                         <span class="btn-text">Save and Publish</span>
                     </button>
                 </div>
-                                </form>
+            </form>
         </div>
     </div>
 
