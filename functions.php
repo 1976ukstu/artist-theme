@@ -150,3 +150,13 @@ function artist_theme_clean_styles() {
 add_action( 'wp_enqueue_scripts', 'artist_theme_clean_styles', 1 );
 
 // Additional custom functions can be added below
+
+// Redirect all pages to the contact page except the contact page itself
+add_action('template_redirect', function() {
+    if (!is_page('contact-page')) {
+        wp_redirect(home_url('/contact-page/'));
+        exit;
+    }
+});
+
+// Additional custom functions can be added below
